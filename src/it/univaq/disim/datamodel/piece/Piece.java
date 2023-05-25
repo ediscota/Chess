@@ -8,6 +8,6 @@ import lombok.Data;
 	
 	protected int yCord;
 	
-	protected String color;
+	protected Color color;
 
 }
