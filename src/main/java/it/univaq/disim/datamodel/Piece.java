@@ -1,4 +1,4 @@
-package src.it.univaq.disim.datamodel.piece;
+package it.univaq.disim.datamodel;
 
 import lombok.Data;
 

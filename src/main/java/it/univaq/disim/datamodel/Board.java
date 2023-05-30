@@ -1,4 +1,4 @@
-package src.it.univaq.disim.datamodel;
+package it.univaq.disim.datamodel;
 
 public class Board {
 	
