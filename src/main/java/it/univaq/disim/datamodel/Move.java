@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class Move {
-    private Location startLocation;
-
-    private Location endLocation;
+    private int startXCord;
+    private int startYCord;
+    private int endXCord;
+    private int endYCord;
 }
