@@ -4,10 +4,8 @@ import lombok.Data;
 
 @Data public abstract class Piece {
 	
-	protected int xCord;
-	
-	protected int yCord;
-	
+	protected Location location;
+
 	protected Color color;
 
 }
