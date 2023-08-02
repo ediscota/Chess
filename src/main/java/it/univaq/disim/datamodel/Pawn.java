@@ -12,14 +12,14 @@ import lombok.Data;
     @Override
     public String toString() {
         if (getColor() == Color.BIANCO) {
-            return "\u2659"; // Simbolo pedone bianco: ♙
+            return "♙"; 
         } else {
-            return "\u265F"; // Simbolo pedone nero: ♟
+            return "♟"; 
         }
     }
     
    
-    public List <Move> getAvaibleMoves (Board board, int xCord, int yCord) {
+    public List <Move> AvailableMoves (Board board, int xCord, int yCord) {
 		
 	
     List<Move> availableMoves = new ArrayList<>();

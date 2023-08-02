@@ -10,7 +10,7 @@ import lombok.Data;
 	protected int xCord;
 	protected int yCord;
 	protected Color color;
-	
+	public List <Move> availableMoves;
 }
 
 	
