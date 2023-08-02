@@ -4,13 +4,16 @@ import lombok.Data;
 
 @Data
 public class Board {
+	 static final int columnsNumber = 8;
+	 static final int linesNumber = 8;
 	
 	private Piece [][] board = new Piece[8][8];
+	 
 
 	//prende in input una posizione e controlla se è valida
 	public boolean isValidLocation (int x, int y){
 
-		if (x < 0 || x > 8  || y < 0 || y > 8)
+		if (x < 0 || x > columnsNumber || y < 0 || y > linesNumber)
 			return false;
 		else
 			return getPieceat(x,y) == null;

@@ -1,5 +1,8 @@
 package it.univaq.disim.datamodel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Data;
 
 @Data public abstract class Piece {
@@ -7,5 +10,8 @@ import lombok.Data;
 	protected int xCord;
 	protected int yCord;
 	protected Color color;
-
+	
 }
+
+	
+	
