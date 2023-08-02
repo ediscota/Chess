@@ -11,7 +11,7 @@ import lombok.Data;
 
     @Override
     public String toString() {
-        if (getColor() == Color.BIANCO) {
+        if (this.getColor() == Color.BIANCO) {
             return "♙"; 
         } else {
             return "♟"; 
@@ -19,9 +19,8 @@ import lombok.Data;
     }
     
    
-    public List <Move> AvailableMoves (Board board, int xCord, int yCord) {
+    public List <Move> availableMoves (Board board, int xCord, int yCord) {
 		
-	
     List<Move> availableMoves = new ArrayList<>();
 
     int direction = (this.getColor() == Color.BIANCO) ? 1: -1;

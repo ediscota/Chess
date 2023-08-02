@@ -16,7 +16,7 @@ public class Board {
 		if (x < 0 || x > columnsNumber || y < 0 || y > linesNumber)
 			return false;
 		else
-			return getPieceat(x,y) == null;
+			return true;
 
 
 

@@ -7,19 +7,19 @@ public class Rook extends Piece {
 
 	@Override
     public String toString() {
-        if (getColor() == Color.BIANCO) {
+        if (this.getColor() == Color.BIANCO) {
             return "♖"; 
         } else {
-            return "♜ "; 
+            return "♜"; 
         }
     }
 	
-	public List<Move> getAvailableMoves(Board board, int xCord, int yCord) {
+	public List<Move> availableMoves(Board board, int xCord, int yCord) {
         List<Move> availableMoves = new ArrayList<>();
 
         // Mosse verso l'alto
         for (int x = xCord + 1; x < Board.columnsNumber; x++) {
-            if (board.isValidLocation(x, yCord)) {
+            if (board.isValidLocation(x, yCord)||  board.getPieceat(x, yCord).getColor()!=this.getColor() ) {
                 availableMoves.add(new Move(xCord, yCord, x, yCord));
             } else {
                 break;
@@ -28,7 +28,7 @@ public class Rook extends Piece {
 
         // Mosse verso il basso
         for (int x = xCord - 1; x >= 0; x--) {
-            if (board.isValidLocation(x, yCord)) {
+            if (board.isValidLocation(x, yCord)||  board.getPieceat(x, yCord).getColor()!=this.getColor()) {
                 availableMoves.add(new Move(xCord, yCord, x, yCord));
             } else {
                 break;
@@ -46,7 +46,7 @@ public class Rook extends Piece {
 
         // Mosse verso sinistra
         for (int y = yCord - 1; y >= 0; y-- ) {
-            if (board.isValidLocation(xCord, y)) {
+            if (board.isValidLocation(xCord, y)|| board.getPieceat(xCord, y).getColor()!=this.getColor()) {
                 availableMoves.add(new Move(xCord, yCord, xCord, y));
             } else {
                 break;
