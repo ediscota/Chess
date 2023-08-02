@@ -10,7 +10,7 @@ public class Bishop extends Piece {
 		if (this.getColor() == Color.BIANCO) {
 			return "♗";
 		} else {
-			return "♟";
+			return "♝";
 		}
 	}
 
