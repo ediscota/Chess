@@ -1,18 +1,34 @@
-package it.univaq.disim.datamodel;
+package it.univaq.disim.service;
 
+import it.univaq.disim.datamodel.Bishop;
+import it.univaq.disim.datamodel.Color;
+import it.univaq.disim.datamodel.King;
+import it.univaq.disim.datamodel.Knight;
+import it.univaq.disim.datamodel.Pawn;
+import it.univaq.disim.datamodel.Piece;
+import it.univaq.disim.datamodel.Queen;
+import it.univaq.disim.datamodel.Rook;
 import lombok.Data;
 
 @Data
 public class Board {
-	static final int columnsNumber = 8;
-	static final int linesNumber = 8;
+	private static final int columnsNumber = 8;
+	private static final int linesNumber = 8;
 
 	private Piece[][] board = new Piece[8][8];
+
+	public static int getLinesnumber() {
+		return linesNumber;
+	}
+
+	public static int getColumnsnumber() {
+		return columnsNumber;
+	}
 
 	// prende in input una posizione e controlla se è valida
 	public boolean isValidLocation(int x, int y) {
 
-		if (x < 0 || x > columnsNumber || y < 0 || y > linesNumber)
+		if (x < 0 || x > getColumnsnumber() || y < 0 || y > getLinesnumber())
 			return false;
 		else
 			return true;
@@ -44,7 +60,7 @@ public class Board {
 		board[0][6] = new Knight(Color.BIANCO);
 		board[0][7] = new Rook(Color.BIANCO);
 
-		for (int i = 0; i < columnsNumber; i++) {
+		for (int i = 0; i < getColumnsnumber(); i++) {
 			board[1][i] = new Pawn(Color.BIANCO);
 		}
 
@@ -57,13 +73,13 @@ public class Board {
 		board[7][6] = new Knight(Color.NERO);
 		board[7][7] = new Rook(Color.NERO);
 
-		for (int i = 0; i < columnsNumber; i++) {
+		for (int i = 0; i < getColumnsnumber(); i++) {
 			board[6][i] = new Pawn(Color.NERO);
 		}
 
 		// Inizializza il resto della scacchiera con pezzi vuoti
 		for (int i = 2; i < 6; i++) {
-			for (int j = 0; j < columnsNumber; j++) {
+			for (int j = 0; j < getColumnsnumber(); j++) {
 				board[i][j] = null;
 			}
 		}
@@ -73,9 +89,9 @@ public class Board {
 
 		System.out.println("  a b c d e f g h");
 		System.out.println("  ----------------");
-		for (int i = 0; i < linesNumber; i++) {
+		for (int i = 0; i < getLinesnumber(); i++) {
 			System.out.print((8 - i) + "|");
-			for (int j = 0; j < columnsNumber; j++) {
+			for (int j = 0; j < getColumnsnumber(); j++) {
 				Piece piece = board[i][j];
 				if (piece == null) {
 					System.out.print(" ");

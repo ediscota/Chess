@@ -3,6 +3,8 @@ package it.univaq.disim.datamodel;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.univaq.disim.service.Board;
+
 public class Queen extends Piece {
 	public Queen(Color color) {
 		// TODO Auto-generated constructor stub

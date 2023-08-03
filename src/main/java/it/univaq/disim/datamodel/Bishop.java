@@ -3,6 +3,8 @@ package it.univaq.disim.datamodel;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.univaq.disim.service.Board;
+
 public class Bishop extends Piece {
 
 	public Bishop(Color color) {
