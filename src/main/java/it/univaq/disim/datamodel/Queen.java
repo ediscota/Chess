@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Queen extends Piece {
+	public Queen(Color color) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public String toString() {
 		if (this.getColor() == Color.BIANCO) {

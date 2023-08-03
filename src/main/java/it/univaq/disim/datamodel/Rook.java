@@ -5,6 +5,10 @@ import java.util.List;
 
 public class Rook extends Piece {
 
+	public Rook(Color color) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
     public String toString() {
         if (this.getColor() == Color.BIANCO) {

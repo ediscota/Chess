@@ -5,44 +5,47 @@ import java.util.List;
 
 import lombok.Data;
 
+@Data
+public class Pawn extends Piece {
 
-@Data public class Pawn extends Piece {
+	public Pawn(Color bianco) {
+		// TODO Auto-generated constructor stub
+	}
 
+	@Override
+	public String toString() {
+		if (this.getColor() == Color.BIANCO) {
+			return "♙";
+		} else {
+			return "♟";
+		}
+	}
 
-    @Override
-    public String toString() {
-        if (this.getColor() == Color.BIANCO) {
-            return "♙"; 
-        } else {
-            return "♟"; 
-        }
-    }
-    
-   
-    public List <Move> availableMoves (Board board, int xCord, int yCord) {
-		
-    List<Move> availableMoves = new ArrayList<>();
+	public List<Move> availableMoves(Board board, int xCord, int yCord) {
 
-    int direction = (this.getColor() == Color.BIANCO) ? 1: -1;
-     
-    int endYCord = yCord + direction;
+		List<Move> availableMoves = new ArrayList<>();
 
-    if (board.isValidLocation(xCord , endYCord)) {
-        availableMoves.add(new Move(xCord, yCord, xCord, endYCord));
-    }
-	 // Controllo mosse di cattura
-    int newX1 = xCord + 1;
-    int newX2 = xCord - 1;
-    int newYCattura = yCord + direction;
+		int direction = (this.getColor() == Color.BIANCO) ? 1 : -1;
 
-    if (board.getPieceat(newX1, newYCattura).getColor() != this.getColor()) {
-    	availableMoves.add(new Move(xCord, yCord, newX1, newYCattura));
-    }
+		int endYCord = yCord + direction;
 
-    if (board.getPieceat(newX2, newYCattura).getColor() != this.getColor()) {
-    	availableMoves.add(new Move(xCord, yCord, newX2, newYCattura));
-    }
-	return availableMoves;
-	
-  }
-}   
+		if (board.isValidLocation(xCord, endYCord)) {
+			availableMoves.add(new Move(xCord, yCord, xCord, endYCord));
+		}
+		// Controllo mosse di cattura
+		int newX1 = xCord + 1;
+		int newX2 = xCord - 1;
+		int newYCattura = yCord + direction;
+
+		if (board.getPieceat(newX1, newYCattura).getColor() != this.getColor()) {
+			availableMoves.add(new Move(xCord, yCord, newX1, newYCattura));
+		}
+
+		if (board.getPieceat(newX2, newYCattura).getColor() != this.getColor()) {
+			availableMoves.add(new Move(xCord, yCord, newX2, newYCattura));
+		}
+		return availableMoves;
+
+	}
+
+}
