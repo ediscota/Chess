@@ -31,15 +31,14 @@ public class Queen extends Piece {
 			int newY = yCord + dir[1];
 			Piece destinationPiece = board.getPieceat(newX, newY);
 			while (board.isValidLocation(newX, newY) || destinationPiece.getColor() != this.getColor()) {
-				if (destinationPiece == null) {
-					availableMoves.add(new Move(xCord, yCord, newX, newY));
 
-					break;
-				}
+				availableMoves.add(new Move(xCord, yCord, newX, newY));
 
-				newX += dir[0];
-				newY += dir[1];
-				destinationPiece = board.getPieceat(newX, newY);
+			
+
+			newX += dir[0];
+			newY += dir[1];
+			destinationPiece = board.getPieceat(newX, newY);
 			}
 		}
 

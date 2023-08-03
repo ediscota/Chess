@@ -23,11 +23,9 @@ public class Bishop extends Piece {
 			int x = xCord + dir[0];
 			int y = yCord + dir[1];
 			Piece pieceAtDestination = board.getPieceat(x, y);
-			while (board.isValidLocation(x, y) || pieceAtDestination.getColor()!=this.getColor() ) {
-				
-				if (pieceAtDestination == null || pieceAtDestination.getColor() != this.getColor()) {
-					availableMoves.add(new Move(xCord, yCord, x, y));
-				}
+			while (board.isValidLocation(x, y) || pieceAtDestination.getColor() != this.getColor()) {
+
+				availableMoves.add(new Move(xCord, yCord, x, y));
 
 				x += dir[0];
 				y += dir[1];
