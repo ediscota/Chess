@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.univaq.disim.service.Board;
-import lombok.Data;
 
-@Data
+
+
 public class Pawn extends Piece {
 
 	public Pawn(Color bianco) {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
