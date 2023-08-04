@@ -18,8 +18,8 @@ public class Knight extends Piece {
 			return "♞";
 		}
 	}
-
-	public List<Move> availableMoves(Board board, int xCord, int yCord) {
+@Override
+	public List<Move> getAvailableMoves(Board board, int xCord, int yCord) {
 		List<Move> availableMoves = new ArrayList<>();
 
 		int[][] moves = { { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 }, { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 } };

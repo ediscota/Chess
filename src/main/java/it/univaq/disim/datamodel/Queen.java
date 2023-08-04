@@ -19,8 +19,9 @@ public class Queen extends Piece {
 		}
 	}
 
-	public List<Move> availableMoves(Board board, int xCord, int yCord) {
-		List<Move> queenMoves = new ArrayList<>();
+@Override
+	public List<Move> getAvailableMoves(Board board, int xCord, int yCord) {
+		List<Move> availableMoves = new ArrayList<>();
 
 		int[][] directions = { { 0, 1 }, // Spostamento verso destra
 				{ 0, -1 }, // Spostamento verso sinistra
@@ -48,6 +49,6 @@ public class Queen extends Piece {
 			}
 		}
 
-		return queenMoves;
+		return availableMoves;
 	}
 }

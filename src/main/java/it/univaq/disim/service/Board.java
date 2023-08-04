@@ -1,9 +1,13 @@
 package it.univaq.disim.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import it.univaq.disim.datamodel.Bishop;
 import it.univaq.disim.datamodel.Color;
 import it.univaq.disim.datamodel.King;
 import it.univaq.disim.datamodel.Knight;
+import it.univaq.disim.datamodel.Move;
 import it.univaq.disim.datamodel.Pawn;
 import it.univaq.disim.datamodel.Piece;
 import it.univaq.disim.datamodel.Queen;
@@ -106,4 +110,25 @@ public class Board {
 		System.out.println("  a b c d e f g h");
 	}
 
+	public List<Piece> getPiecesByColor(Color playerColor) {
+		List<Piece> piecesByColor = new ArrayList<>();
+		for (int x = 0; x < Board.columnsNumber; x++) {
+			for (int y = 0; y < Board.linesNumber; y++) {
+				Piece piece = board[x][y];
+				if (piece != null && piece.getColor() == playerColor) {
+					piecesByColor.add(piece);
+				}
+			}
+		}
+
+		return piecesByColor;
+	}
+
+    public void applyMove(Move move) {
+		int startX = move.getStartXCord();
+        int startY = move.getStartYCord();
+        int endX = move.getEndXCord();
+        int endY = move.getEndYCord();
+
+    }
 }
