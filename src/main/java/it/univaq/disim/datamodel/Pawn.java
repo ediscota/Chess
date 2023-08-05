@@ -39,11 +39,11 @@ public class Pawn extends Piece {
 		int newX2 = xCord - 1;
 		int newYCattura = yCord + direction;
 
-		if (board.getPieceat(newX1, newYCattura).getColor() != this.getColor()) {
+		if (board.getPieceAt(newX1, newYCattura).getColor() != this.getColor()) {
 			availableMoves.add(new Move(xCord, yCord, newX1, newYCattura));
 		}
 
-		if (board.getPieceat(newX2, newYCattura).getColor() != this.getColor()) {
+		if (board.getPieceAt(newX2, newYCattura).getColor() != this.getColor()) {
 			availableMoves.add(new Move(xCord, yCord, newX2, newYCattura));
 		}
 		return availableMoves;

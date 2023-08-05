@@ -27,7 +27,7 @@ public class Knight extends Piece {
 		for (int[] move : moves) {
 			int x = xCord + move[0];
 			int y = yCord + move[1];
-			Piece pieceAtDestination = board.getPieceat(x, y);
+			Piece pieceAtDestination = board.getPieceAt(x, y);
 			if (board.isValidLocation(x, y) || pieceAtDestination.getColor() != this.getColor()) {
 
 				availableMoves.add(new Move(xCord, yCord, x, y));

@@ -8,15 +8,15 @@ import it.univaq.disim.service.Board;
 public class Bishop extends Piece {
 
 	public Bishop(Color color) {
-		// TODO Auto-generated constructor stub
+		this.color=color;
 	}
 
 	@Override
 	public String toString() {
 		if (this.getColor() == Color.BIANCO) {
-			return "♗";
+			return "WB";
 		} else {
-			return "♝";
+			return "BB";
 		}
 	}
 @Override
@@ -28,14 +28,14 @@ public class Bishop extends Piece {
 		for (int[] dir : directions) {
 			int x = xCord + dir[0];
 			int y = yCord + dir[1];
-			Piece pieceAtDestination = board.getPieceat(x, y);
+			Piece pieceAtDestination = board.getPieceAt(x, y);
 			while (board.isValidLocation(x, y) || pieceAtDestination.getColor() != this.getColor()) {
 
 				availableMoves.add(new Move(xCord, yCord, x, y));
 
 				x += dir[0];
 				y += dir[1];
-				pieceAtDestination = board.getPieceat(x, y);
+				pieceAtDestination = board.getPieceAt(x, y);
 			}
 		}
 

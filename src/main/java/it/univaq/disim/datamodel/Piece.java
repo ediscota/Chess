@@ -10,7 +10,7 @@ public abstract class Piece {
 
 	private int xCord;
 	private int yCord;
-	private Color color;
+	protected Color color;
 	private List<Move> availableMoves;
 
 	public abstract List <Move> getAvailableMoves (Board board, int xCord, int yCord);

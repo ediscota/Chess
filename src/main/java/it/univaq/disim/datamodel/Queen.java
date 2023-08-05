@@ -36,7 +36,7 @@ public class Queen extends Piece {
 		for (int[] dir : directions) {
 			int newX = xCord + dir[0];
 			int newY = yCord + dir[1];
-			Piece destinationPiece = board.getPieceat(newX, newY);
+			Piece destinationPiece = board.getPieceAt(newX, newY);
 			while (board.isValidLocation(newX, newY) || destinationPiece.getColor() != this.getColor()) {
 
 				availableMoves.add(new Move(xCord, yCord, newX, newY));
@@ -45,7 +45,7 @@ public class Queen extends Piece {
 
 			newX += dir[0];
 			newY += dir[1];
-			destinationPiece = board.getPieceat(newX, newY);
+			destinationPiece = board.getPieceAt(newX, newY);
 			}
 		}
 

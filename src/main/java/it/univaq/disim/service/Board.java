@@ -43,7 +43,7 @@ public class Board {
 	// isValidLocation, poi restituisce il pezzo che
 	// corrisponde a quelle coordinate, oppure se la posizione non è valida lancia
 	// una eccezione
-	public Piece getPieceat(int x, int y) throws IllegalArgumentException {
+	public Piece getPieceAt(int x, int y) throws IllegalArgumentException {
 
 		if (isValidLocation(x, y))
 			return board[x][y];
@@ -129,6 +129,42 @@ public class Board {
         int startY = move.getStartYCord();
         int endX = move.getEndXCord();
         int endY = move.getEndYCord();
+	    Piece pieceToMove = board[startX][startY];
+		Piece destinationPiece = board[endX][endY];
+        board[startX][startY] = null;
+        board[endX][endY] = pieceToMove;
+		pieceToMove.setXCord(endX);
+        pieceToMove.setYCord(endY);
+		    // Se la mossa è una mossa di cattura, rimuovi il pezzo catturato dalla scacchiera
+			if (destinationPiece != null) {
+				destinationPiece.setXCord(-1); // Rimuovi il pezzo dalla scacchiera impostando le coordinate a -1
+				destinationPiece.setYCord(-1);
+				// TODO destinationPiece.setValue=0; per la conta dei pezzi, value attualmente non presente
+			}
+
+
 
     }
+	/*public List<Move> getAvailableMovesByColor(Color color) {
+		List <Move> availableMoves = new ArrayList<>();
+		
+		for (int x = 0; x < columnsNumber; x++) {
+			for (int y = 0; y < linesNumber; y++) {                                         metodo attualmente non utilizzato
+				Piece piece = board[x][y];
+				if (piece != null && piece.getColor() == color) {
+					List<Move> pieceMoves = piece.getAvailableMoves(this, x, y);
+					availableMoves.addAll(pieceMoves);
+				}
+			}
+		}
+		
+		return availableMoves;
+	}
+	
+	*/
+public Object isKingInCheck () {
+ return null;
+ // TODO isKingInCheck method
 }
+	}
+

@@ -28,7 +28,7 @@ public class King extends Piece {
 		for (int[] dir : directions) {
 			int x = xCord + dir[0];
 			int y = yCord + dir[1];
-			Piece pieceAtDestination = board.getPieceat(x, y);
+			Piece pieceAtDestination = board.getPieceAt(x, y);
 			if (board.isValidLocation(x, y) || pieceAtDestination.getColor() != this.getColor()) {
 
 				availableMoves.add(new Move(xCord, yCord, x, y));
