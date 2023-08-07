@@ -14,12 +14,15 @@ import it.univaq.disim.datamodel.Queen;
 import it.univaq.disim.datamodel.Rook;
 import lombok.Data;
 
+
+
 @Data
 public class Board {
 	private static final int columnsNumber = 8;
 	private static final int linesNumber = 8;
 
 	private Piece[][] board = new Piece[8][8];
+	private List<Move> getAcailableMovesByColor;
 
 	public static int getLinesnumber() {
 		return linesNumber;
@@ -145,11 +148,11 @@ public class Board {
 
 
     }
-	/*public List<Move> getAvailableMovesByColor(Color color) {
+	public List<Move> getAvailableMovesByColor(Color color) {
 		List <Move> availableMoves = new ArrayList<>();
 		
 		for (int x = 0; x < columnsNumber; x++) {
-			for (int y = 0; y < linesNumber; y++) {                                         metodo attualmente non utilizzato
+			for (int y = 0; y < linesNumber; y++) {                                         
 				Piece piece = board[x][y];
 				if (piece != null && piece.getColor() == color) {
 					List<Move> pieceMoves = piece.getAvailableMoves(this, x, y);
@@ -161,10 +164,40 @@ public class Board {
 		return availableMoves;
 	}
 	
-	*/
-public Object isKingInCheck () {
- return null;
- // TODO isKingInCheck method
-}
+	
+public Object isKingInCheck (Color color, Board board) {
+ // inizializzazione delle coordinate del re al di fuori della scacchiera
+	int kingX = -1;
+    int kingY = -1;
+	boolean kingFound= false;
+    boolean isInCheck= false;
+	// doppio ciclo per trovare le coordinate del re
+	for (int x = 0; x < Board.columnsNumber && !kingFound; x++) {
+        for (int y = 0; y < Board.linesNumber && !kingFound; y++) {
+			Piece piece = board.getPieceAt(x, y);
+			if (piece instanceof King && piece.getColor() == color){
+				kingX = x;
+				kingY = y;
+				kingFound = true;
+			}
+		}
 	}
+	//prima si controlla se il re è nella scacchiera, in caso positivo si controlla se è minacciato da mosse avversarie 
+	if (!kingFound) return false;
+	List <Move> opponentMoves = board.getAvailableMovesByColor(color.oppositeColor());
+		for (Move move : opponentMoves) {
+			if (move.getEndXCord() == kingX && move.getEndYCord() == kingY) {
+                isInCheck = true;
+                break;
+            }
+
+		}
+		return isInCheck;
+	}
+
+}
+
+		
+
+	
 
