@@ -6,12 +6,23 @@ import it.univaq.disim.service.Board;
 import lombok.Data;
 
 @Data
-public abstract class Piece {
+public abstract class Piece implements Cloneable {
 
 	private int xCord;
 	private int yCord;
 	protected Color color;
 	private List<Move> availableMoves;
 
-	public abstract List <Move> getAvailableMoves (Board board, int xCord, int yCord);
+	public abstract List<Move> getAvailableMoves(Board board, int xCord, int yCord);
+
+	@Override
+	public Piece clone() {
+		try {
+			return (Piece) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// Gestisci l'eccezione se la classe non supporta la clonazione
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

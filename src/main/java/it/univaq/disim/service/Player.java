@@ -6,5 +6,6 @@ import lombok.Data;
 @Data
 public abstract class Player implements Engine {
     private final Color color;
+   
 
 }

@@ -14,10 +14,8 @@ import it.univaq.disim.datamodel.Queen;
 import it.univaq.disim.datamodel.Rook;
 import lombok.Data;
 
-
-
 @Data
-public class Board {
+public class Board implements Cloneable {
 	private static final int columnsNumber = 8;
 	private static final int linesNumber = 8;
 
@@ -127,32 +125,33 @@ public class Board {
 		return piecesByColor;
 	}
 
-    public void applyMove(Move move) {
+	public void applyMove(Move move) {
 		int startX = move.getStartXCord();
-        int startY = move.getStartYCord();
-        int endX = move.getEndXCord();
-        int endY = move.getEndYCord();
-	    Piece pieceToMove = board[startX][startY];
+		int startY = move.getStartYCord();
+		int endX = move.getEndXCord();
+		int endY = move.getEndYCord();
+		Piece pieceToMove = board[startX][startY];
 		Piece destinationPiece = board[endX][endY];
-        board[startX][startY] = null;
-        board[endX][endY] = pieceToMove;
+		board[startX][startY] = null;
+		board[endX][endY] = pieceToMove;
 		pieceToMove.setXCord(endX);
-        pieceToMove.setYCord(endY);
-		    // Se la mossa è una mossa di cattura, rimuovi il pezzo catturato dalla scacchiera
-			if (destinationPiece != null) {
-				destinationPiece.setXCord(-1); // Rimuovi il pezzo dalla scacchiera impostando le coordinate a -1
-				destinationPiece.setYCord(-1);
-				// TODO destinationPiece.setValue=0; per la conta dei pezzi, value attualmente non presente
-			}
+		pieceToMove.setYCord(endY);
+		// Se la mossa è una mossa di cattura, rimuovi il pezzo catturato dalla
+		// scacchiera
+		if (destinationPiece != null) {
+			destinationPiece.setXCord(-1); // Rimuovi il pezzo dalla scacchiera impostando le coordinate a -1
+			destinationPiece.setYCord(-1);
+			// TODO destinationPiece.setValue=0; per la conta dei pezzi, value attualmente
+			// non presente
+		}
 
+	}
 
-
-    }
 	public List<Move> getAvailableMovesByColor(Color color) {
-		List <Move> availableMoves = new ArrayList<>();
-		
+		List<Move> availableMoves = new ArrayList<>();
+
 		for (int x = 0; x < columnsNumber; x++) {
-			for (int y = 0; y < linesNumber; y++) {                                         
+			for (int y = 0; y < linesNumber; y++) {
 				Piece piece = board[x][y];
 				if (piece != null && piece.getColor() == color) {
 					List<Move> pieceMoves = piece.getAvailableMoves(this, x, y);
@@ -160,44 +159,84 @@ public class Board {
 				}
 			}
 		}
-		
+
 		return availableMoves;
 	}
-	
-	
-public Object isKingInCheck (Color color, Board board) {
- // inizializzazione delle coordinate del re al di fuori della scacchiera
-	int kingX = -1;
-    int kingY = -1;
-	boolean kingFound= false;
-    boolean isInCheck= false;
-	// doppio ciclo per trovare le coordinate del re
-	for (int x = 0; x < Board.columnsNumber && !kingFound; x++) {
-        for (int y = 0; y < Board.linesNumber && !kingFound; y++) {
-			Piece piece = board.getPieceAt(x, y);
-			if (piece instanceof King && piece.getColor() == color){
-				kingX = x;
-				kingY = y;
-				kingFound = true;
+
+	public boolean isKingInCheck(Color color, Board board) {
+		// inizializzazione delle coordinate del re al di fuori della scacchiera
+		int kingX = -1;
+		int kingY = -1;
+		boolean kingFound = false;
+		boolean isInCheck = false;
+		// doppio ciclo per trovare le coordinate del re
+		for (int x = 0; x < Board.columnsNumber && !kingFound; x++) {
+			for (int y = 0; y < Board.linesNumber && !kingFound; y++) {
+				Piece piece = board.getPieceAt(x, y);
+				if (piece instanceof King && piece.getColor() == color) {
+					kingX = x;
+					kingY = y;
+					kingFound = true;
+				}
 			}
 		}
-	}
-	//prima si controlla se il re è nella scacchiera, in caso positivo si controlla se è minacciato da mosse avversarie 
-	if (!kingFound) return false;
-	List <Move> opponentMoves = board.getAvailableMovesByColor(color.oppositeColor());
+		// prima si controlla se il re è nella scacchiera, in caso positivo si controlla
+		// se è minacciato da mosse avversarie
+		if (!kingFound)
+			return false;
+		List<Move> opponentMoves = board.getAvailableMovesByColor(color.oppositeColor());
 		for (Move move : opponentMoves) {
 			if (move.getEndXCord() == kingX && move.getEndYCord() == kingY) {
-                isInCheck = true;
-                break;
-            }
+				isInCheck = true;
+				break;
+			}
 
 		}
 		return isInCheck;
 	}
+	//scacco matto
+    public boolean isCheckMate (Color color, Board board) {
+		//se il re non è in scacco non può esserci scacco matto
+		if (!isKingInCheck(color, board)) {
+			return false;
+		}
+		//ottieni tutte le mosse dei pezzi dello stesso colore del re
+		List<Move> alliesMoves = getAvailableMovesByColor(color);
+		for (Move move : alliesMoves) {
+			Board cloneBoard = this.clone();
+			cloneBoard.applyMove(move);
+			if (!cloneBoard.isKingInCheck(color, cloneBoard)) {
+				// Il re può muoversi in una casella sicura, quindi non c'è scacco matto
+				return false;
+			}
+		}
+		return true;
+	}
+	@Override
+	// TODO non penso sia necessario il try-catch
+	public Board clone() {
+        try {
+            Board cloneBoard = (Board) super.clone();
 
+            // Clona l'array bidimensionale di Piece
+            cloneBoard.board = new Piece[columnsNumber][linesNumber];
+            for (int i = 0; i < columnsNumber; i++) {
+                for (int j = 0; j < linesNumber; j++) {
+                    if (this.board[i][j] != null) {
+                        cloneBoard.board[i][j] = this.board[i][j].clone();
+                    }
+                }
+            }
+
+            // Ora gli oggetti Piece all'interno dell'array sono stati clonati
+
+            return cloneBoard;
+        } catch (CloneNotSupportedException e) {
+            // Gestisci l'eccezione se la classe non supporta la clonazione
+            e.printStackTrace();
+            return null;
+
+        }
+    }
 }
-
-		
-
-	
 
