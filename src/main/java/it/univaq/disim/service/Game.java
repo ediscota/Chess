@@ -13,16 +13,34 @@ public class Game {
         this.board = board;
     }
 
-//TODO overloading di playGame. A dire il vero non sono così sicuro ci sia bisogno di fare overloading
-  //penso sia necessario solo per le scritte a schermo a ogni turno
-    public void playGame (Board board, HumanPlayer whitePlayer, CPUPlayer blackPlayer){
+    public void startNewGame
+
+
+    public void playGame (Board board, Player whitePlayer, Player blackPlayer){
         //player1= new HumanPlayer(Color.BIANCO);
         // non penso ci sia bisogno, le istanze di HumanPlayer vengono create nel
         //metodo startNewGame, e poi vengono passate a questo metodo
         boolean isGameOver = false;
         Player currentPlayer = whitePlayer;
-    }
-    public void playGame (Board board, HumanPlayer whitePlayer, HumanPlayer blackPlayer){
+        Player winner= null;
 
+        while (!isGameOver){
+            board.displayBoard();
+            if (board.isKingInCheck(currentPlayer.getColor(), board)){
+                System.out.println("Giocatore " + currentPlayer.getColor().toString() + "il tuo re è sotto scacco, attenzione!");
+            }
+            if (board.isCheckMate(currentPlayer.getColor(), board)){
+                System.out.println("Scacco matto! partita terminata.");
+                winner = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer;
+                isGameOver = true;
+            }
+            System.out.println ("Giocatore " + currentPlayer.getColor().toString() + "è il tuo turno.");
+            currentPlayer.makeMove(board);
+            //cambia turno
+            currentPlayer = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer;
+
+        }
+        System.out.println("Il giocatore " + winner.getColor().toString() + "ha vinto.");
     }
+   
 }

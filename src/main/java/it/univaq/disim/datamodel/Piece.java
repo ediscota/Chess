@@ -16,7 +16,7 @@ public abstract class Piece implements Cloneable {
 	public abstract List<Move> getAvailableMoves(Board board, int xCord, int yCord);
 
 	@Override
-	public Piece clone() {
+	public Piece clone() throws CloneNotSupportedException {
 		try {
 			return (Piece) super.clone();
 		} catch (CloneNotSupportedException e) {
@@ -25,4 +25,5 @@ public abstract class Piece implements Cloneable {
 			return null;
 		}
 	}
+	
 }
