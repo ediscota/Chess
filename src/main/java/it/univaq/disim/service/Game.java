@@ -7,11 +7,12 @@ public class Game {
     private Player BlackPlayer;
     private Board board;
    
+   /* 
     public Game(Player whitePlayer, Player blackPlayer, Board board) {
         this.whitePlayer = whitePlayer;
         this.BlackPlayer = BlackPlayer;
         this.board = board;
-    }
+    }*/
 
     public void startNewCPUGame (){
         Player whitePlayer = new HumanPlayer(Color.BIANCO);

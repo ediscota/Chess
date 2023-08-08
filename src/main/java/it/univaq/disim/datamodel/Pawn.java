@@ -12,6 +12,7 @@ public class Pawn extends Piece {
 
   	public Pawn(Color bianco) {
 		this.color=color;
+		// TODO scrivi costruttore in modo giusto
 		
 		
 	}
