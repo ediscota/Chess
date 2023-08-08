@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.univaq.disim.service.Board;
+import lombok.Data;
 
 
-
+@Data
 public class Pawn extends Piece {
 
-	public Pawn(Color bianco) {
+  	public Pawn(Color bianco) {
+		this.color=color;
+		
 		
 	}
-
+ 
 	@Override
 	public String toString() {
 		if (this.getColor() == Color.BIANCO) {
@@ -49,5 +52,7 @@ public class Pawn extends Piece {
 		return availableMoves;
 
 	}
+
+
 
 }
