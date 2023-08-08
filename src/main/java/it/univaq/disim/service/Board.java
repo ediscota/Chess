@@ -92,23 +92,33 @@ public class Board implements Cloneable {
 
 	public void displayBoard() {
 
-		System.out.println("  a b c d e f g h");
-		System.out.println("  ----------------");
+		System.out.println("    a    b   c    d    e    f    g    h");
+		System.out.println("  --------------------------------------  ");
 		for (int i = 0; i < getLinesnumber(); i++) {
 			System.out.print((8 - i) + "|");
 			for (int j = 0; j < getColumnsnumber(); j++) {
 				Piece piece = board[i][j];
 				if (piece == null) {
-					System.out.print(" ");
+					System.out.print("    ");
 				} else {
-					System.out.print(piece);
+					if( i > 0 && i < 7) {
+						System.out.print(piece + "" + j);
+					}else {
+						if(j > 4) {
+							System.out.print(piece + "2");
+						}
+						else {
+							System.out.print(piece + "1");
+						}
+						
+					}
 				}
 				System.out.print(" ");
 			}
 			System.out.println("|" + (8 - i));
 		}
-		System.out.println("  ----------------");
-		System.out.println("  a b c d e f g h");
+		System.out.println("  --------------------------------------  ");
+		System.out.println("    a    b   c    d    e    f    g    h");
 	}
 
 	public List<Piece> getPiecesByColor(Color playerColor) {

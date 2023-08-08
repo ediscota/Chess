@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class Pawn extends Piece {
 
-  	public Pawn(Color bianco) {
+  	public Pawn(Color color) {
 		this.color=color;
 		// TODO scrivi costruttore in modo giusto
 		
@@ -20,9 +20,9 @@ public class Pawn extends Piece {
 	@Override
 	public String toString() {
 		if (this.getColor() == Color.BIANCO) {
-			return "♙";
+			return "p_b";
 		} else {
-			return "♟";
+			return "p_n";
 		}
 	}
 	
