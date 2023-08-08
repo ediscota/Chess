@@ -13,11 +13,18 @@ public class Game {
         this.board = board;
     }
 
-    public void startNewGame
+    public void startNewCPUGame (){
+        Player whitePlayer = new HumanPlayer(Color.BIANCO);
+        Player blackPlayer = new CPUPlayer(Color.NERO);
+        Board board = new Board();
+        board.initializeBoard();
+        playGame(board, whitePlayer, blackPlayer);
+    }
+    
 
 
     public void playGame (Board board, Player whitePlayer, Player blackPlayer){
-        //player1= new HumanPlayer(Color.BIANCO);
+        //whitePlayer= new HumanPlayer(Color.BIANCO);
         // non penso ci sia bisogno, le istanze di HumanPlayer vengono create nel
         //metodo startNewGame, e poi vengono passate a questo metodo
         boolean isGameOver = false;

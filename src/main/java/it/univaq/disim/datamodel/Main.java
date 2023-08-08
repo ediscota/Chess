@@ -1,13 +1,13 @@
 package it.univaq.disim.datamodel;
 
 import it.univaq.disim.service.Board;
+import it.univaq.disim.service.Game;
 
 public class Main {
 
 	public static void main(String[] args) {
-		Board board = new Board();
-		board.initializeBoard();
-		board.displayBoard();
+		Game game = new Game(null, null, null);
+		game.startNewCPUGame();
 		
           
 	}                

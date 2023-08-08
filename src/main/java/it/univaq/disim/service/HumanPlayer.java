@@ -15,7 +15,7 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public void makeMove(Board board) throws IllegalArgumentException {
+    public void makeMove(Board board) {
         Scanner scanner = new Scanner(System.in);
 
         // Step 1: Richiedi all'utente di selezionare un pezzo
