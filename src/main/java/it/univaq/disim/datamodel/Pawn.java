@@ -10,12 +10,9 @@ import lombok.Data;
 @Data
 public class Pawn extends Piece {
 
-  	public Pawn(Color color) {
-		this.color=color;
-		// TODO scrivi costruttore in modo giusto
-		
-		
-	}
+	public Pawn(Color color, int xCord, int yCord) {
+        super(color, xCord, yCord);
+    }
  
 	@Override
 	public String toString() {
@@ -42,18 +39,18 @@ public class Pawn extends Piece {
 		int newX1 = xCord + 1;
 		int newX2 = xCord - 1;
 		int newYCattura = yCord + direction;
-
-		if (board.getPieceAt(newX1, newYCattura).getColor() != this.getColor()) {
+		if (board.isValidLocation(newX1, newYCattura)){
+		Piece destinationPiece1 = board.getPieceAt(newX1, newYCattura);
+		if (destinationPiece1 != null && destinationPiece1.getColor() != this.getColor()) {
 			availableMoves.add(new Move(xCord, yCord, newX1, newYCattura));
 		}
-
-		if (board.getPieceAt(newX2, newYCattura).getColor() != this.getColor()) {
+	}
+	if (board.isValidLocation(newX1, newYCattura)){
+		Piece destinationPiece2 = board.getPieceAt(newX2, newYCattura);
+		if (destinationPiece2 != null && destinationPiece2.getColor() != this.getColor()) {
 			availableMoves.add(new Move(xCord, yCord, newX2, newYCattura));
 		}
-		return availableMoves;
-
 	}
-
-
-
+		return availableMoves;
+}
 }

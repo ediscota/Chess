@@ -7,9 +7,9 @@ import it.univaq.disim.service.Board;
 
 public class Rook extends Piece {
 
-	public Rook(Color color) {
-		// TODO Auto-generated constructor stub
-	}
+	public Rook(Color color, int xCord, int yCord) {
+        super(color, xCord, yCord);
+    }
 
 	@Override
 	public String toString() {

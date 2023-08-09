@@ -7,10 +7,9 @@ import it.univaq.disim.service.Board;
 
 public class King extends Piece {
 
-	public King(Color color) {
-		// TODO Auto-generated constructor stub
-	}
-
+	public King(Color color, int xCord, int yCord) {
+        super(color, xCord, yCord);
+    }
 	@Override
 	public String toString() {
 		if (this.getColor() == Color.BIANCO) {

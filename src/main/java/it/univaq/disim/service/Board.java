@@ -33,7 +33,7 @@ public class Board implements Cloneable {
 	// prende in input una posizione e controlla se è valida
 	public boolean isValidLocation(int x, int y) {
 
-		if (x < 0 || x > getColumnsnumber() || y < 0 || y > getLinesnumber())
+		if (x < 0 || x >= Board.columnsNumber || y < 0 || y >= Board.linesNumber )
 			return false;
 		else
 			return true;
@@ -56,32 +56,32 @@ public class Board implements Cloneable {
 
 	public void initializeBoard() {
 		// Inizializza la scacchiera posizionando i pezzi correttamente
-		board[0][0] = new Rook(Color.BIANCO);
-		board[0][1] = new Knight(Color.BIANCO);
-		board[0][2] = new Bishop(Color.BIANCO);
-		board[0][3] = new Queen(Color.BIANCO);
-		board[0][4] = new King(Color.BIANCO);
-		board[0][5] = new Bishop(Color.BIANCO);
-		board[0][6] = new Knight(Color.BIANCO);
-		board[0][7] = new Rook(Color.BIANCO);
-
+		board[0][0] = new Rook(Color.BIANCO, 0, 0);
+		board[0][1] = new Knight(Color.BIANCO, 0, 1);
+		board[0][2] = new Bishop(Color.BIANCO, 0, 2);
+		board[0][3] = new Queen(Color.BIANCO, 0, 3);
+		board[0][4] = new King(Color.BIANCO, 0, 4);
+		board[0][5] = new Bishop(Color.BIANCO, 0, 5);
+		board[0][6] = new Knight(Color.BIANCO, 0, 6);
+		board[0][7] = new Rook(Color.BIANCO, 0, 7);
+	
 		for (int i = 0; i < getColumnsnumber(); i++) {
-			board[1][i] = new Pawn(Color.BIANCO);
+			board[1][i] = new Pawn(Color.BIANCO, 1, i);
 		}
-
-		board[7][0] = new Rook(Color.NERO);
-		board[7][1] = new Knight(Color.NERO);
-		board[7][2] = new Bishop(Color.NERO);
-		board[7][3] = new Queen(Color.NERO);
-		board[7][4] = new King(Color.NERO);
-		board[7][5] = new Bishop(Color.NERO);
-		board[7][6] = new Knight(Color.NERO);
-		board[7][7] = new Rook(Color.NERO);
-
+	
+		board[7][0] = new Rook(Color.NERO, 7, 0);
+		board[7][1] = new Knight(Color.NERO, 7, 1);
+		board[7][2] = new Bishop(Color.NERO, 7, 2);
+		board[7][3] = new Queen(Color.NERO, 7, 3);
+		board[7][4] = new King(Color.NERO, 7, 4);
+		board[7][5] = new Bishop(Color.NERO, 7, 5);
+		board[7][6] = new Knight(Color.NERO, 7, 6);
+		board[7][7] = new Rook(Color.NERO, 7, 7);
+	
 		for (int i = 0; i < getColumnsnumber(); i++) {
-			board[6][i] = new Pawn(Color.NERO);
+			board[6][i] = new Pawn(Color.NERO, 6, i);
 		}
-
+	
 		// Inizializza il resto della scacchiera con pezzi vuoti
 		for (int i = 2; i < 6; i++) {
 			for (int j = 0; j < getColumnsnumber(); j++) {

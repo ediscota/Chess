@@ -6,8 +6,8 @@ import java.util.List;
 import it.univaq.disim.service.Board;
 
 public class Knight extends Piece {
-	public Knight(Color color) {
-		// TODO Auto-generated constructor stub
+	public Knight(Color color, int xCord, int yCord) {
+		super(color, xCord, yCord);
 	}
 
 	@Override
@@ -18,7 +18,8 @@ public class Knight extends Piece {
 			return "c_n";
 		}
 	}
-@Override
+
+	@Override
 	public List<Move> getAvailableMoves(Board board, int xCord, int yCord) {
 		List<Move> availableMoves = new ArrayList<>();
 
@@ -27,11 +28,13 @@ public class Knight extends Piece {
 		for (int[] move : moves) {
 			int x = xCord + move[0];
 			int y = yCord + move[1];
-			Piece pieceAtDestination = board.getPieceAt(x, y);
-			if (board.isValidLocation(x, y) || pieceAtDestination.getColor() != this.getColor()) {
+			if (board.isValidLocation(x, y)) {
+				Piece pieceAtDestination = board.getPieceAt(x, y);
+				if (board.isValidLocation(x, y) || pieceAtDestination.getColor() != this.getColor()) {
 
-				availableMoves.add(new Move(xCord, yCord, x, y));
+					availableMoves.add(new Move(xCord, yCord, x, y));
 
+				}
 			}
 		}
 

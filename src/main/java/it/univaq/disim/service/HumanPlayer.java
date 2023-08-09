@@ -23,7 +23,7 @@ public class HumanPlayer extends Player {
         int x = scanner.nextInt();
         int y = scanner.nextInt();
     
-        Piece selectedPiece = board.getPieceAt(x, y);
+        Piece selectedPiece = board.getPieceAt(x, y);;
     
         if (selectedPiece == null || selectedPiece.getColor() != this.getColor()) {
             throw new IllegalArgumentException("La casella selezionata non contiene un pezzo valido.");

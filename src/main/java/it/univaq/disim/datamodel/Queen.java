@@ -6,9 +6,9 @@ import java.util.List;
 import it.univaq.disim.service.Board;
 
 public class Queen extends Piece {
-	public Queen(Color color) {
-		// TODO Auto-generated constructor stub
-	}
+	public Queen(Color color, int xCord, int yCord) {
+        super(color, xCord, yCord);
+    }
 
 	@Override
 	public String toString() {

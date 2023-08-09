@@ -25,5 +25,11 @@ public abstract class Piece implements Cloneable {
 			return null;
 		}
 	}
+
+	public Piece(Color color, int xCord, int yCord) {
+		this.color=color;
+		this.xCord=xCord;
+		this.yCord=yCord;
+	}
 	
 }

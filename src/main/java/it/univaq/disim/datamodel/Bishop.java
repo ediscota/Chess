@@ -7,9 +7,9 @@ import it.univaq.disim.service.Board;
 
 public class Bishop extends Piece {
 
-	public Bishop(Color color) {
-		this.color=color;
-	}
+	public Bishop(Color color, int xCord, int yCord) {
+        super(color, xCord, yCord);
+    }
 
 	@Override
 	public String toString() {
@@ -19,26 +19,32 @@ public class Bishop extends Piece {
 			return "a_n";
 		}
 	}
-@Override
+	@Override
 	public List<Move> getAvailableMoves(Board board, int xCord, int yCord) {
 		List<Move> availableMoves = new ArrayList<>();
-
+	
 		int[][] directions = { { -1, -1 }, { -1, 1 }, { 1, -1 }, { 1, 1 } };
-
+	
 		for (int[] dir : directions) {
 			int x = xCord + dir[0];
 			int y = yCord + dir[1];
-			Piece pieceAtDestination = board.getPieceAt(x, y);
-			while (board.isValidLocation(x, y) || pieceAtDestination.getColor() != this.getColor()) {
-
-				availableMoves.add(new Move(xCord, yCord, x, y));
-
+			
+			while (board.isValidLocation(x, y)) {
+				Piece pieceAtDestination = board.getPieceAt(x, y);
+				
+				if (pieceAtDestination == null) {
+					availableMoves.add(new Move(xCord, yCord, x, y));
+				} else if (pieceAtDestination.getColor() != this.getColor()) {
+					availableMoves.add(new Move(xCord, yCord, x, y));
+				} else {
+					break;  // Esci dal ciclo se trovi un pezzo dello stesso colore
+				}
+				
 				x += dir[0];
 				y += dir[1];
-				pieceAtDestination = board.getPieceAt(x, y);
 			}
 		}
-
+	
 		return availableMoves;
 	}
 
