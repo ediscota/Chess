@@ -90,12 +90,12 @@ public class Board implements Cloneable {
 		}
 	}
 
-	public void displayBoard() {
+	public void displayBoard() { //TODO Display e try catch eccezione
 
-		System.out.println("    1    2   3    4    5    6    7    8");
+		System.out.println("    0    1   2    3    4    5    6    7");
 		System.out.println("  --------------------------------------  ");
 		for (int i = 0; i < getLinesnumber(); i++) {
-			System.out.print((1 + i) + "|");
+			System.out.print((0 + i) + "|");
 			for (int j = 0; j < getColumnsnumber(); j++) {
 				Piece piece = board[i][j];
 				if (piece == null) {
@@ -115,10 +115,10 @@ public class Board implements Cloneable {
 				}
 				System.out.print(" ");
 			}
-			System.out.println("|" + (1 + i));
+			System.out.println("|" + (0 + i));
 		}
 		System.out.println("  --------------------------------------  ");
-		System.out.println("    a    b   c    d    e    f    g    h");
+		System.out.println("    0    1   2    3    4    5    6    7");
 	}
 
 	public List<Piece> getPiecesByColor(Color playerColor) {
@@ -142,7 +142,7 @@ public class Board implements Cloneable {
 		int endY = move.getEndYCord();
 		Piece pieceToMove = board[startX][startY];
 		Piece destinationPiece = board[endX][endY];
-		board[startX][startY] = null;
+		board[startX][startY] = null; //rimuovi dalla posizione di partenza il pezzo
 		board[endX][endY] = pieceToMove;
 		pieceToMove.setXCord(endX);
 		pieceToMove.setYCord(endY);

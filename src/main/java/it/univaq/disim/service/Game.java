@@ -25,9 +25,6 @@ public class Game {
 
 
     public void playGame (Board board, Player whitePlayer, Player blackPlayer){
-        //whitePlayer= new HumanPlayer(Color.BIANCO);
-        // non penso ci sia bisogno, le istanze di HumanPlayer vengono create nel
-        //metodo startNewGame, e poi vengono passate a questo metodo
         boolean isGameOver = false;
         Player currentPlayer = whitePlayer;
         Player winner= null;
