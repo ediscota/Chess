@@ -92,10 +92,10 @@ public class Board implements Cloneable {
 
 	public void displayBoard() {
 
-		System.out.println("    a    b   c    d    e    f    g    h");
+		System.out.println("    1    2   3    4    5    6    7    8");
 		System.out.println("  --------------------------------------  ");
 		for (int i = 0; i < getLinesnumber(); i++) {
-			System.out.print((8 - i) + "|");
+			System.out.print((1 + i) + "|");
 			for (int j = 0; j < getColumnsnumber(); j++) {
 				Piece piece = board[i][j];
 				if (piece == null) {
@@ -115,7 +115,7 @@ public class Board implements Cloneable {
 				}
 				System.out.print(" ");
 			}
-			System.out.println("|" + (8 - i));
+			System.out.println("|" + (1 + i));
 		}
 		System.out.println("  --------------------------------------  ");
 		System.out.println("    a    b   c    d    e    f    g    h");
