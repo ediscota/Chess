@@ -26,7 +26,8 @@ public class Rook extends Piece {
 		// Mosse verso l'alto
 		for (int x = xCord + 1; x < Board.getColumnsnumber(); x++) {
 			if (board.isValidLocation(x, yCord) || board.getPieceAt(x, yCord).getColor() != this.getColor()) {
-				availableMoves.add(new Move(xCord, yCord, x, yCord));
+				if(!(this.hasAdjacentPieceOfSameColor(x, yCord, this.getColor(), board)))
+					availableMoves.add(new Move(xCord, yCord, x, yCord));
 			} else {
 				break;
 			}
@@ -35,7 +36,8 @@ public class Rook extends Piece {
 		// Mosse verso il basso
 		for (int x = xCord - 1; x >= 0; x--) {
 			if (board.isValidLocation(x, yCord) || board.getPieceAt(x, yCord).getColor() != this.getColor()) {
-				availableMoves.add(new Move(xCord, yCord, x, yCord));
+				if(!(this.hasAdjacentPieceOfSameColor(x, yCord, this.getColor(), board)))	
+					availableMoves.add(new Move(xCord, yCord, x, yCord));
 			} else {
 				break;
 			}
@@ -44,7 +46,8 @@ public class Rook extends Piece {
 		// Mosse verso destra
 		for (int y = yCord + 1; y < Board.getLinesnumber(); y++) {
 			if (board.isValidLocation(xCord, y) || board.getPieceAt(xCord, y).getColor() != this.getColor()) {
-				availableMoves.add(new Move(xCord, yCord, xCord, y));
+				if(!(this.hasAdjacentPieceOfSameColor(xCord, y, this.getColor(), board)))
+					availableMoves.add(new Move(xCord, yCord, xCord, y));
 			} else {
 				break;
 			}
@@ -53,7 +56,8 @@ public class Rook extends Piece {
 		// Mosse verso sinistra
 		for (int y = yCord - 1; y >= 0; y--) {
 			if (board.isValidLocation(xCord, y) || board.getPieceAt(xCord, y).getColor() != this.getColor()) {
-				availableMoves.add(new Move(xCord, yCord, xCord, y));
+				if(!(this.hasAdjacentPieceOfSameColor(xCord, y, this.getColor(), board)))
+					availableMoves.add(new Move(xCord, yCord, xCord, y));
 			} else {
 				break;
 			}
@@ -61,4 +65,39 @@ public class Rook extends Piece {
 
 		return availableMoves;
 	}
-}       //aaa
+
+@Override
+public boolean hasAdjacentPieceOfSameColor(int xCord, int yCord, Color pieceColor, Board board) {
+	if(xCord > 0) {
+		if(board.isValidLocation(xCord-1,yCord)) {
+			Piece adjacentPiece = board.getPieceAt(xCord-1, yCord);
+			if(adjacentPiece != null && adjacentPiece.getColor() == pieceColor)
+				return true;
+		}
+	}
+	if(yCord > 0) {
+		if(board.isValidLocation(xCord,yCord-1)) {
+			Piece adjacentPiece = board.getPieceAt(xCord, yCord-1);
+			if(adjacentPiece != null && adjacentPiece.getColor() == pieceColor)
+				return true;
+		}
+	}
+	
+	if(xCord < board.getColumnsnumber()) {
+		if(board.isValidLocation(xCord+1,yCord)) {
+			Piece adjacentPiece = board.getPieceAt(xCord+1, yCord);
+			if(adjacentPiece != null && adjacentPiece.getColor() == pieceColor)
+				return true;
+		}
+	}
+	
+	if(yCord < board.getLinesnumber()) {
+		if(board.isValidLocation(xCord,yCord+1)) {
+			Piece adjacentPiece = board.getPieceAt(xCord, yCord+1);
+			if(adjacentPiece != null && adjacentPiece.getColor() == pieceColor)
+				return true;
+		}
+	}
+	return false;
+	}
+}

@@ -26,6 +26,8 @@ public abstract class Piece implements Cloneable {
 		}
 	}
 
+	public abstract boolean hasAdjacentPieceOfSameColor(int xCord, int yCord, Color pieceColor, Board board);
+	
 	public Piece(Color color, int xCord, int yCord) {
 		this.color=color;
 		this.xCord=xCord;
