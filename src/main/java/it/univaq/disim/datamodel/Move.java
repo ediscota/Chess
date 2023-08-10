@@ -10,7 +10,10 @@ public class Move {
     private int endYCord;
 
     public Move(int xCord, int yCord, int endXCord, int endYCord) {
-		// TODO Auto-generated constructor stub
+		this.startXCord=xCord;
+    this.startYCord=yCord;
+    this.endXCord=endXCord;
+    this.endYCord=endYCord;
 	}
 	
     @Override

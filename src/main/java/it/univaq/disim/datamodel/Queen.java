@@ -7,8 +7,8 @@ import it.univaq.disim.service.Board;
 
 public class Queen extends Piece {
 	public Queen(Color color, int xCord, int yCord) {
-        super(color, xCord, yCord);
-    }
+		super(color, xCord, yCord);
+	}
 
 	@Override
 	public String toString() {
@@ -19,7 +19,7 @@ public class Queen extends Piece {
 		}
 	}
 
-@Override
+	@Override
 	public List<Move> getAvailableMoves(Board board, int xCord, int yCord) {
 		List<Move> availableMoves = new ArrayList<>();
 
@@ -36,16 +36,21 @@ public class Queen extends Piece {
 		for (int[] dir : directions) {
 			int newX = xCord + dir[0];
 			int newY = yCord + dir[1];
-			Piece destinationPiece = board.getPieceAt(newX, newY);
-			while (board.isValidLocation(newX, newY) || destinationPiece.getColor() != this.getColor()) {
+			Piece destinationPiece = null;
+			while (board.isValidLocation(newX, newY)) {
+				destinationPiece = board.getPieceAt(newX, newY);
 
-				availableMoves.add(new Move(xCord, yCord, newX, newY));
+				if (destinationPiece == null || destinationPiece.getColor() != this.getColor()) {
+					availableMoves.add(new Move(xCord, yCord, newX, newY));
+				}
 
-			
+				if (destinationPiece != null) {
+					break; // appena incontra un ostacolo si ferma
+				}
 
-			newX += dir[0];
-			newY += dir[1];
-			destinationPiece = board.getPieceAt(newX, newY);
+				newX += dir[0];
+				newY += dir[1];
+
 			}
 		}
 

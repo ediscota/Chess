@@ -25,15 +25,16 @@ public class King extends Piece {
 		int[][] directions = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 }, { 1, 1 }, { 1, -1 }, { -1, 1 }, { -1, -1 } };
 
 		for (int[] dir : directions) {
-			int x = xCord + dir[0];
-			int y = yCord + dir[1];
-			Piece pieceAtDestination = board.getPieceAt(x, y);
-			if (board.isValidLocation(x, y) || pieceAtDestination.getColor() != this.getColor()) {
+			int newX = xCord + dir[0];
+			int newY = yCord + dir[1];
+			if (board.isValidLocation(newX, newY)){
+			Piece pieceAtDestination = board.getPieceAt(newX, newY);
+			if (pieceAtDestination == null || pieceAtDestination.getColor() != this.getColor()) {
 
-				availableMoves.add(new Move(xCord, yCord, x, y));
+				availableMoves.add(new Move(xCord, yCord, newX, newY));
 			}
 		}
-
+	}
 		return availableMoves;
 	}
 }
