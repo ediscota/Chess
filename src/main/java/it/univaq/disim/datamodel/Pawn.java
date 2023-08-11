@@ -27,11 +27,21 @@ public class Pawn extends Piece {
 
 		int direction = (this.getColor() == Color.BIANCO) ? 1 : -1;
 
-		int endYCord = yCord + direction;
+		
+		/*int endYCord = yCord + direction;
 
 		if (board.isValidLocation(xCord, endYCord)) {
 			availableMoves.add(new Move(xCord, yCord, xCord, endYCord));
+		}*/
+		
+		int endXCord = xCord + direction;
+
+		if (board.isValidLocation(endXCord, yCord)) {
+			availableMoves.add(new Move(xCord, yCord, endXCord, yCord));
 		}
+		
+		
+		
 		// Controllo mosse di cattura
 		int newX1 = xCord + 1;
 		int newX2 = xCord - 1;
