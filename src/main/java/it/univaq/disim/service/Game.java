@@ -40,7 +40,7 @@ public class Game {
         while (!isGameOver){
             board.displayBoard();
             if (board.isKingInCheck(currentPlayer.getColor(), board)){
-                System.out.println("Giocatore " + currentPlayer.getColor().toString() + "il tuo re è sotto scacco, attenzione!");
+                System.out.println("Giocatore " + currentPlayer.getColor().toString() + " il tuo re è sotto scacco, attenzione!");
             }
             if (board.isCheckMate(currentPlayer.getColor(), board)){
                 System.out.println("Scacco matto! partita terminata.");

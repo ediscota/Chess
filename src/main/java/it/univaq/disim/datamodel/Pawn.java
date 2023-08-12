@@ -7,11 +7,9 @@ import it.univaq.disim.service.Board;
 
 public class Pawn extends Piece {
 	
-	private boolean hasMoved;
 
 	public Pawn(Color color, int xCord, int yCord) {
 		super(color, xCord, yCord);
-		this.hasMoved = false;
 	}
 
 	@Override
@@ -41,12 +39,14 @@ public class Pawn extends Piece {
 
 		if (board.getPieceAt(endXCord,yCord) == null && board.isValidLocation(endXCord, yCord)) {
 			availableMoves.add(new Move(xCord, yCord, endXCord, yCord));
-		
-			if (!this.hasMoved && board.isValidLocation(xCord + (2 * direction), yCord)) {
-				availableMoves.add(new Move(xCord, yCord, xCord + (2 * direction), yCord));
-				this.hasMoved = true;
-			}
-		
+			
+			 // controllo per mossa doppia all'inizio
+	        if ((direction == 1 && xCord == 1) || (direction == -1 && xCord == 6)) {
+	            int doubleMove = xCord + 2 * direction;
+	            if (board.getPieceAt(doubleMove, yCord) == null) {
+	                availableMoves.add(new Move(xCord, yCord, doubleMove, yCord));
+	            }
+	        }
 		}
 		
 		// Controllo mosse di cattura

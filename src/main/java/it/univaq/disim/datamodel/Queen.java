@@ -13,9 +13,9 @@ public class Queen extends Piece {
 	@Override
 	public String toString() {
 		if (this.getColor() == Color.BIANCO) {
-			return "R_b";
+			return "d_b";
 		} else {
-			return "R_n";
+			return "d_n";
 		}
 	}
 
