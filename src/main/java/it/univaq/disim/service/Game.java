@@ -21,6 +21,14 @@ public class Game {
         board.initializeBoard();
         playGame(board, whitePlayer, blackPlayer);
     }
+
+    public void startNewHumanGame(){
+         Player whitePlayer = new HumanPlayer(Color.BIANCO);
+         Player blackPlayer = new HumanPlayer(Color.NERO);
+         Board board = new Board();
+         board.initializeBoard();
+         playGame(board, whitePlayer, blackPlayer);
+    }
     
 
 
