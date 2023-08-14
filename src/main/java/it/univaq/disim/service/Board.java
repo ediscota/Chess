@@ -18,6 +18,7 @@ import lombok.Data;
 public class Board implements Cloneable {
 	private static final int columnsNumber = 8;
 	private static final int linesNumber = 8;
+	private Move lastMove;
 
 	private Piece[][] board = new Piece[8][8];
 	private List<Move> getAcailableMovesByColor;
@@ -154,8 +155,11 @@ public class Board implements Cloneable {
 			// TODO destinationPiece.setValue=0; per la conta dei pezzi, value attualmente
 			// non presente
 		}
-
+        lastMove = move;
 	}
+	public Move getLastMove() {
+        return lastMove;
+    }
 
 	public List<Move> getAvailableMovesByColor(Color color) {
 		List<Move> availableMoves = new ArrayList<>();

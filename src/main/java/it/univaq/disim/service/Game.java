@@ -1,11 +1,17 @@
 package it.univaq.disim.service;
 
+import java.util.List;
+
 import it.univaq.disim.datamodel.Color;
+import it.univaq.disim.datamodel.Move;
+import org.apache.commons.collections4.CollectionUtils;
 
 public class Game {
     private Player whitePlayer;
     private Player BlackPlayer;
     private Board board;
+    private List<Move> whiteMoves;
+    private List<Move> blackMoves;
    
    /* 
     public Game(Player whitePlayer, Player blackPlayer, Board board) {
@@ -51,6 +57,12 @@ public class Game {
             
             try {
                 currentPlayer.makeMove(board);
+                if (currentPlayer.getColor() == Color.BIANCO) {
+                    whiteMoves.add(board.getLastMove());  // Aggiungi mossa bianca
+                } else {
+                    blackMoves.add(board.getLastMove());  // Aggiungi mossa nera
+                }
+
                 currentPlayer = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer; // cambia turno
             } catch (IllegalArgumentException e) {
                 System.out.println("Mossa non valida. Riprova.");
@@ -62,5 +74,20 @@ public class Game {
 
         }
     }
-   
-}
+  /*  public void undoMoves (int number) throws IllegalArgumentException {
+    int totalMoves = whiteMoves.size() + blackMoves.size();
+    if (number > totalMoves) throw new IllegalArgumentException("Non ci sono abbastanza mosse da cancellare");
+    for (int i = 0; i < number; i++) {
+        if (!blackMoves.isEmpty() && !whiteMoves.isEmpty() ) {
+            blackMoves.remove(blackMoves.getlast);
+            whiteMoves.remove(whiteMoves.getLast);
+            board.applyMove(blackMoves.getlast);
+        } ;
+        }
+    }
+    
+
+    }*/
+
+   }
+
