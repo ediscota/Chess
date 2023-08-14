@@ -14,6 +14,7 @@ public abstract class Piece implements Cloneable {
 	private List<Move> availableMoves;
 
 	public abstract List<Move> getAvailableMoves(Board board, int xCord, int yCord);
+	//public abstract List<Move> getAvailableMoves(Board board);
 
 	@Override
 	public Piece clone() {
@@ -26,6 +27,7 @@ public abstract class Piece implements Cloneable {
 		}
 	}
 
+	
 	public Piece(Color color, int xCord, int yCord) {
 		this.color=color;
 		this.xCord=xCord;

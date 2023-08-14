@@ -19,7 +19,7 @@ public class HumanPlayer extends Player {
         Scanner scanner = new Scanner(System.in);
 
         // Step 1: Richiedi all'utente di selezionare un pezzo
-        System.out.print("Seleziona il pezzo da muovere (coordX coordY): ");
+        System.out.print("Seleziona il pezzo da muovere (riga colonna): ");
         int x = scanner.nextInt();
         int y = scanner.nextInt();
     

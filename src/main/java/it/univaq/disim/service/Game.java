@@ -21,6 +21,14 @@ public class Game {
         board.initializeBoard();
         playGame(board, whitePlayer, blackPlayer);
     }
+
+    public void startNewHumanGame(){
+         Player whitePlayer = new HumanPlayer(Color.BIANCO);
+         Player blackPlayer = new HumanPlayer(Color.NERO);
+         Board board = new Board();
+         board.initializeBoard();
+         playGame(board, whitePlayer, blackPlayer);
+    }
     
 
 
@@ -32,20 +40,27 @@ public class Game {
         while (!isGameOver){
             board.displayBoard();
             if (board.isKingInCheck(currentPlayer.getColor(), board)){
-                System.out.println("Giocatore " + currentPlayer.getColor().toString() + "il tuo re è sotto scacco, attenzione!");
+                System.out.println("Giocatore " + currentPlayer.getColor().toString() + " il tuo re è sotto scacco, attenzione!");
             }
             if (board.isCheckMate(currentPlayer.getColor(), board)){
                 System.out.println("Scacco matto! partita terminata.");
                 winner = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer;
                 isGameOver = true;
             }
-            System.out.println ("Giocatore " + currentPlayer.getColor().toString() + "è il tuo turno.");
-            currentPlayer.makeMove(board);
-            //cambia turno
-            currentPlayer = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer;
+            System.out.println("Giocatore " + currentPlayer.getColor().toString() + ", è il tuo turno.");
+            
+            try {
+                currentPlayer.makeMove(board);
+                currentPlayer = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer; // cambia turno
+            } catch (IllegalArgumentException e) {
+                System.out.println("Mossa non valida. Riprova.");
+            }
+        }
+        
+        if (winner != null) {
+            System.out.println("Il giocatore " + winner.getColor().toString() + " ha vinto.");
 
         }
-        System.out.println("Il giocatore " + winner.getColor().toString() + "ha vinto.");
     }
    
 }
