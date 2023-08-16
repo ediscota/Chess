@@ -8,6 +8,7 @@ import it.univaq.disim.datamodel.Move;
 import it.univaq.disim.datamodel.Piece;
 
 public class HumanPlayer extends Player {
+	
 
     public HumanPlayer(Color color) {
         super(color);
@@ -15,15 +16,23 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public void makeMove(Board board) {
+    public void makeMove(Board board, Game game) {
         Scanner scanner = new Scanner(System.in);
-
+        
         // Step 1: Richiedi all'utente di selezionare un pezzo
+        if(!game.getBlackMoves().isEmpty() && !game.getWhiteMoves().isEmpty() && game.getMovesCount() < 5)
+        	System.out.print("premi 9 per annullare l'ultima mossa, oppure ");
         System.out.print("Seleziona il pezzo da muovere (riga colonna): ");
         int x = scanner.nextInt();
+        if(x == 9 && game.getMovesCount() < 5) {
+        	//game.undoMoves(board);
+        	game.undoMoves(board);
+        	return;
+        }
+        	
         int y = scanner.nextInt();
     
-        Piece selectedPiece = board.getPieceAt(x, y);;
+        Piece selectedPiece = board.getPieceAt(x, y);
     
         if (selectedPiece == null || selectedPiece.getColor() != this.getColor()) {
             throw new IllegalArgumentException("La casella selezionata non contiene un pezzo valido.");

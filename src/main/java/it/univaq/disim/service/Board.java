@@ -1,7 +1,10 @@
 package it.univaq.disim.service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
+import org.apache.commons.collections4.*;
 
 import it.univaq.disim.datamodel.Bishop;
 import it.univaq.disim.datamodel.Color;

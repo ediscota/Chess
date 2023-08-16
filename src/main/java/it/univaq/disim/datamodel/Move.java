@@ -16,7 +16,11 @@ public class Move {
     this.endYCord=endYCord;
 	}
 	
-    @Override
+    public Move() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
     public String toString () {
       return  "(" + startXCord + ", " + startYCord + ") -> (" + endXCord + ", " + endYCord + ")";
 

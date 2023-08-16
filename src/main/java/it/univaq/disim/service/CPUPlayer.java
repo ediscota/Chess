@@ -15,7 +15,7 @@ public class CPUPlayer extends Player {
     }
 
     @Override
-    public void makeMove(Board board) {
+    public void makeMove(Board board, Game game) {
   Color playerColor = this.getColor();
         List<Piece> pieces = board.getPiecesByColor(playerColor);
           Random random = new Random();
