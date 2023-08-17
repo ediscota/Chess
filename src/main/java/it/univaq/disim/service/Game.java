@@ -29,6 +29,9 @@ public class Game {
     public LinkedList<Move> getWhiteMoves(){
     	return this.whiteMoves;
     }
+    public Player getCurrentPlayer() {
+    	return this.currentPlayer;
+    }
     public void startNewCPUGame (){
         Player whitePlayer = new HumanPlayer(Color.BIANCO);
         Player blackPlayer = new CPUPlayer(Color.NERO);
@@ -66,12 +69,6 @@ public class Game {
             
             try {
                 currentPlayer.makeMove(board, this);
-                if (currentPlayer.getColor() == Color.BIANCO) {
-                    whiteMoves.add(board.getLastMove());  // Aggiungi mossa bianca
-                } else {
-                    blackMoves.add(board.getLastMove());  // Aggiungi mossa nera
-                }
-                //currentPlayer.makeMove(board, this);
                 currentPlayer = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer; // cambia turno
             } catch (IllegalArgumentException e) {
                 System.out.println("Mossa non valida. Riprova.");
@@ -85,34 +82,24 @@ public class Game {
     }
     
     
-    public void undoMoves (Board board) throws IllegalArgumentException {
+    public void undoMoves (Board board){
     	this.movesCount++;
-	    //int totalMoves = whiteMoves.size() + blackMoves.size();
-	    //if (number > totalMoves) throw new IllegalArgumentException("Non ci sono abbastanza mosse da cancellare");
-	    //for (int i = 0; i < number; i++) {
-    	Move lastMove, undoMove = new Move();
+    	Move lastMoveWhite, lastMoveBlack, undoMoveBlack = new Move(),undoMoveWhite = new Move();
 	        if (!blackMoves.isEmpty() && !whiteMoves.isEmpty() ) {
-	        	if(this.currentPlayer.getColor() == Color.BIANCO) {
-	        		lastMove = whiteMoves.getLast();
-	        		undoMove.setStartXCord(lastMove.getEndXCord());
-	        		undoMove.setStartYCord(lastMove.getEndYCord());
-	        		undoMove.setEndXCord(lastMove.getStartXCord());
-	        		undoMove.setEndYCord(lastMove.getStartYCord());
-	        		board.applyMove(undoMove);
-	            	whiteMoves.remove(whiteMoves.getLast());           	
-	        	}
-	        	else {
-	        		lastMove = blackMoves.getLast();
-	        		undoMove.setStartXCord(lastMove.getEndXCord());
-	        		undoMove.setStartYCord(lastMove.getEndYCord());
-	        		undoMove.setEndXCord(lastMove.getStartXCord());
-	        		undoMove.setEndYCord(lastMove.getStartYCord());
-	        		board.applyMove(undoMove);
-	        		blackMoves.remove(blackMoves.getLast());
-	        	}
-	        } 
-	    //}
-	    //currentPlayer = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer;
+	        	lastMoveWhite = whiteMoves.remove(whiteMoves.size() -1);
+	        	lastMoveBlack = blackMoves.remove(blackMoves.size() -1);
+        		undoMoveWhite.setStartXCord(lastMoveWhite.getEndXCord());
+        		undoMoveWhite.setStartYCord(lastMoveWhite.getEndYCord());
+        		undoMoveWhite.setEndXCord(lastMoveWhite.getStartXCord());
+        		undoMoveWhite.setEndYCord(lastMoveWhite.getStartYCord());
+        		undoMoveBlack.setStartXCord(lastMoveBlack.getEndXCord());
+        		undoMoveBlack.setStartYCord(lastMoveBlack.getEndYCord());
+        		undoMoveBlack.setEndXCord(lastMoveBlack.getStartXCord());
+        		undoMoveBlack.setEndYCord(lastMoveBlack.getStartYCord());
+        		board.undoLastMove(undoMoveBlack);
+        		board.undoLastMove(undoMoveWhite); 
+        		currentPlayer = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer;
+	        }
     }
 	public int getMovesCount() {
 		return this.movesCount;

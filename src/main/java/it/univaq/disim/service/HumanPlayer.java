@@ -25,11 +25,12 @@ public class HumanPlayer extends Player {
         System.out.print("Seleziona il pezzo da muovere (riga colonna): ");
         int x = scanner.nextInt();
         if(x == 9 && game.getMovesCount() < 5) {
-        	//game.undoMoves(board);
         	game.undoMoves(board);
         	return;
         }
-        	
+        
+        
+        
         int y = scanner.nextInt();
     
         Piece selectedPiece = board.getPieceAt(x, y);
@@ -57,6 +58,12 @@ public class HumanPlayer extends Player {
     
         // Step 4: Esegui la mossa
         board.applyMove(selectedMove);
+        
+        if (game.getCurrentPlayer().getColor() == Color.BIANCO) {
+            game.getWhiteMoves().add(board.getLastMove());  // Aggiungi mossa bianca
+        } else {
+            game.getBlackMoves().add(board.getLastMove());  // Aggiungi mossa nera
+        }
     }
     }
       

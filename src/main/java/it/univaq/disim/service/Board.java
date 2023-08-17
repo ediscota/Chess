@@ -160,6 +160,13 @@ public class Board implements Cloneable {
 		}
         lastMove = move;
 	}
+	
+	public void undoLastMove(Move move) {
+		Piece pieceToMove = board[move.getStartXCord()][move.getStartYCord()];
+		board[move.getStartXCord()][move.getStartYCord()] = null;
+		board[move.getEndXCord()][move.getEndYCord()] = pieceToMove;
+	}
+	
 	public Move getLastMove() {
         return lastMove;
     }
