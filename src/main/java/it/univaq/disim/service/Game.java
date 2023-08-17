@@ -92,7 +92,7 @@ public class Game {
 	    //for (int i = 0; i < number; i++) {
     	Move lastMove, undoMove = new Move();
 	        if (!blackMoves.isEmpty() && !whiteMoves.isEmpty() ) {
-	        	if(this.currentPlayer == whitePlayer) {
+	        	if(this.currentPlayer.getColor() == Color.BIANCO) {
 	        		lastMove = whiteMoves.getLast();
 	        		undoMove.setStartXCord(lastMove.getEndXCord());
 	        		undoMove.setStartYCord(lastMove.getEndYCord());
