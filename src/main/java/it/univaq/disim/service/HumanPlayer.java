@@ -16,16 +16,22 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public void makeMove(Board board, Game game) {
+    public void makeMove(Board board, Game game) throws IllegalArgumentException{
         Scanner scanner = new Scanner(System.in);
         
         // Step 1: Richiedi all'utente di selezionare un pezzo
-        if(!game.getBlackMoves().isEmpty() && !game.getWhiteMoves().isEmpty() && game.getMovesCount() < 5)
-        	System.out.print("premi 9 per annullare l'ultima mossa, oppure ");
+        if(!game.getBlackMoves().isEmpty() && !game.getWhiteMoves().isEmpty())
+        	System.out.print("premi 9 per annullare le mosse, oppure ");
         System.out.print("Seleziona il pezzo da muovere (riga colonna): ");
         int x = scanner.nextInt();
-        if(x == 9 && game.getMovesCount() < 5) {
-        	game.undoMoves(board);
+        if(x == 9 && !game.getBlackMoves().isEmpty() && !game.getWhiteMoves().isEmpty()) {
+        	System.out.println("Quante mosse vuoi annullare? (al massimo le ultime 5)");
+        	int numberMoves = scanner.nextInt();
+        	if (numberMoves < 1 || numberMoves > 5)
+        		throw new IllegalArgumentException("numero di mosse da annullare non valido");
+        	else if(numberMoves > game.getBlackMoves().size() )
+        		throw new IllegalArgumentException("non ci sono abbastanza mosse da annullare");        		
+        	game.undoMoves(board, numberMoves);
         	return;
         }
         
@@ -57,6 +63,7 @@ public class HumanPlayer extends Player {
         Move selectedMove = availableMoves.get(selectedMoveIndex);
     
         // Step 4: Esegui la mossa
+        
         board.applyMove(selectedMove);
         
         if (game.getCurrentPlayer().getColor() == Color.BIANCO) {

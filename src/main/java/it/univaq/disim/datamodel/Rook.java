@@ -68,36 +68,36 @@ public class Rook extends Piece {
 	}*/
 
 
-    @Override
+	@Override
     public List<Move> getAvailableMoves(Board board, int xCord, int yCord) {
         List<Move> availableMoves = new ArrayList<>();
-        int currentRow = getXCord();
+        /*int currentRow = getXCord();
         int currentCol = getYCord();
-
+*/
         // Verifica mosse verso l'alto
-        for (int row = currentRow - 1; row >= 0; row--) {
-            if (!addMoveIfValid(row, currentCol, board, availableMoves)) {
+        for (int i = xCord - 1; i>= 0; i--) {
+            if (!addMoveIfValid(i, yCord, board, availableMoves)) {
                 break;
             }
         }
 
         // Verifica mosse verso il basso
-        for (int row = currentRow + 1; row <= 7; row++) {
-            if (!addMoveIfValid(row, currentCol, board, availableMoves)) {
+        for (int i = xCord + 1; i<= 7; i++) {
+            if (!addMoveIfValid(i, yCord, board, availableMoves)) {
                 break;
             }
         }
 
         // Verifica mosse verso sinistra
-        for (int col = currentCol - 1; col >= 0; col--) {
-            if (!addMoveIfValid(currentRow, col, board, availableMoves)) {
+        for (int i = yCord - 1; i >= 0; i--) {
+            if (!addMoveIfValid(xCord, i, board, availableMoves)) {
                 break;
             }
         }
 
         // Verifica mosse verso destra
-        for (int col = currentCol + 1; col <= 7; col++) {
-            if (!addMoveIfValid(currentRow, col, board, availableMoves)) {
+        for (int i = yCord + 1; i <= 7; i++) {
+            if (!addMoveIfValid(xCord, i, board, availableMoves)) {
                 break;
             }
         }
@@ -105,14 +105,14 @@ public class Rook extends Piece {
         return availableMoves;
     }
 
-    private boolean addMoveIfValid(int row, int col, Board board, List<Move> moves) {
-        Piece targetPiece = board.getPieceAt(row, col);
+    private boolean addMoveIfValid(int xCord, int yCord, Board board, List<Move> moves) {
+        Piece targetPiece = board.getPieceAt(xCord, yCord);
 
         if (targetPiece == null) {
-            moves.add(new Move(getXCord(), getYCord(), row, col));
+            moves.add(new Move(getXCord(), getYCord(), xCord, yCord));
             return true;
         } else if (targetPiece.getColor() != getColor()) {
-            moves.add(new Move(getXCord(), getYCord(), row, col));
+            moves.add(new Move(getXCord(), getYCord(), xCord, yCord));
             return false;
         } else {
             return false;
@@ -120,3 +120,4 @@ public class Rook extends Piece {
     }
 
 }
+

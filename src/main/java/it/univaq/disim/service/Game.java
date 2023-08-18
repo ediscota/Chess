@@ -17,7 +17,6 @@ public class Game implements Serializable{
     private LinkedList<Move> blackMoves = new LinkedList<>();
     private Player currentPlayer;
     private LinkedList<Piece> deadPieces;
-    private int movesCount = 0;
 
     /*
      * public Game(Player whitePlayer, Player blackPlayer, Board board) {
@@ -85,7 +84,7 @@ public class Game implements Serializable{
                     currentPlayer.makeMove(board, this);
                     currentPlayer = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer; // cambia turno
                 } catch (IllegalArgumentException e) {
-                    System.out.println("Mossa non valida. Riprova.");
+                	System.out.println(e.getMessage());
                 }
             }
         }
@@ -96,29 +95,28 @@ public class Game implements Serializable{
         }
     }
 
-    public void undoMoves(Board board) {
-        this.movesCount++;
-        Move lastMoveWhite, lastMoveBlack, undoMoveBlack = new Move(), undoMoveWhite = new Move();
-        if (!blackMoves.isEmpty() && !whiteMoves.isEmpty()) {
-            lastMoveWhite = whiteMoves.remove(whiteMoves.size() - 1);
-            lastMoveBlack = blackMoves.remove(blackMoves.size() - 1);
-            undoMoveWhite.setStartXCord(lastMoveWhite.getEndXCord());
-            undoMoveWhite.setStartYCord(lastMoveWhite.getEndYCord());
-            undoMoveWhite.setEndXCord(lastMoveWhite.getStartXCord());
-            undoMoveWhite.setEndYCord(lastMoveWhite.getStartYCord());
-            undoMoveBlack.setStartXCord(lastMoveBlack.getEndXCord());
-            undoMoveBlack.setStartYCord(lastMoveBlack.getEndYCord());
-            undoMoveBlack.setEndXCord(lastMoveBlack.getStartXCord());
-            undoMoveBlack.setEndYCord(lastMoveBlack.getStartYCord());
-            board.undoLastMove(undoMoveBlack);
-            board.undoLastMove(undoMoveWhite);
-            currentPlayer = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer;
+    public void undoMoves(Board board, int numberMoves) {
+        for (int i = 0; i < numberMoves; i++) {
+	        Move lastMoveWhite, lastMoveBlack, undoMoveBlack = new Move(), undoMoveWhite = new Move();
+	        if (!blackMoves.isEmpty() && !whiteMoves.isEmpty()) {
+	            lastMoveWhite = whiteMoves.remove(whiteMoves.size() - 1);
+	            lastMoveBlack = blackMoves.remove(blackMoves.size() - 1);
+	            undoMoveWhite.setStartXCord(lastMoveWhite.getEndXCord());
+	            undoMoveWhite.setStartYCord(lastMoveWhite.getEndYCord());
+	            undoMoveWhite.setEndXCord(lastMoveWhite.getStartXCord());
+	            undoMoveWhite.setEndYCord(lastMoveWhite.getStartYCord());
+	            undoMoveBlack.setStartXCord(lastMoveBlack.getEndXCord());
+	            undoMoveBlack.setStartYCord(lastMoveBlack.getEndYCord());
+	            undoMoveBlack.setEndXCord(lastMoveBlack.getStartXCord());
+	            undoMoveBlack.setEndYCord(lastMoveBlack.getStartYCord());
+	            board.undoLastMove(undoMoveBlack);
+	            board.undoLastMove(undoMoveWhite);
+	        }
         }
+        currentPlayer = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer;
+        System.out.print(currentPlayer.getColor());
     }
 
-    public int getMovesCount() {
-        return this.movesCount;
-    }
     
     
 }
