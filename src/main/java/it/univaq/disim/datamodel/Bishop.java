@@ -7,8 +7,8 @@ import it.univaq.disim.service.Board;
 
 public class Bishop extends Piece {
 
-	public Bishop(Color color, int xCord, int yCord) {
-        super(color, xCord, yCord);
+	public Bishop(Color color, int xCord, int yCord, int value) {
+        super(color, xCord, yCord, value);
     }
 
 	@Override

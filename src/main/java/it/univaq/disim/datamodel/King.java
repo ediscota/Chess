@@ -7,8 +7,8 @@ import it.univaq.disim.service.Board;
 
 public class King extends Piece {
 
-	public King(Color color, int xCord, int yCord) {
-        super(color, xCord, yCord);
+	public King(Color color, int xCord, int yCord, int value) {
+        super(color, xCord, yCord, value);
     }
 	@Override
 	public String toString() {

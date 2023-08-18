@@ -6,8 +6,8 @@ import java.util.List;
 import it.univaq.disim.service.Board;
 
 public class Queen extends Piece {
-	public Queen(Color color, int xCord, int yCord) {
-		super(color, xCord, yCord);
+	public Queen(Color color, int xCord, int yCord, int value) {
+		super(color, xCord, yCord, value);
 	}
 
 	@Override

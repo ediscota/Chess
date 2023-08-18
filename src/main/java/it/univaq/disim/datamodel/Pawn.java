@@ -8,8 +8,8 @@ import it.univaq.disim.service.Board;
 public class Pawn extends Piece {
 	
 
-	public Pawn(Color color, int xCord, int yCord) {
-		super(color, xCord, yCord);
+	public Pawn(Color color, int xCord, int yCord, int value) {
+		super(color, xCord, yCord, value);
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class Board implements Cloneable {
 	// prende in input una posizione e controlla se è valida
 	public boolean isValidLocation(int x, int y) {
 
-		if (x < 0 || x >= Board.columnsNumber || y < 0 || y >= Board.linesNumber )
+		if (x < 0 || x >= Board.columnsNumber || y < 0 || y >= Board.linesNumber)
 			return false;
 		else
 			return true;
@@ -60,32 +60,32 @@ public class Board implements Cloneable {
 
 	public void initializeBoard() {
 		// Inizializza la scacchiera posizionando i pezzi correttamente
-		board[0][0] = new Rook(Color.BIANCO, 0, 0);
-		board[0][1] = new Knight(Color.BIANCO, 0, 1);
-		board[0][2] = new Bishop(Color.BIANCO, 0, 2);
-		board[0][3] = new Queen(Color.BIANCO, 0, 3);
-		board[0][4] = new King(Color.BIANCO, 0, 4);
-		board[0][5] = new Bishop(Color.BIANCO, 0, 5);
-		board[0][6] = new Knight(Color.BIANCO, 0, 6);
-		board[0][7] = new Rook(Color.BIANCO, 0, 7);
-	
+		board[0][0] = new Rook(Color.BIANCO, 0, 0, 5);
+		board[0][1] = new Knight(Color.BIANCO, 0, 1, 3);
+		board[0][2] = new Bishop(Color.BIANCO, 0, 2, 3);
+		board[0][3] = new Queen(Color.BIANCO, 0, 3, 9);
+		board[0][4] = new King(Color.BIANCO, 0, 4, 0);
+		board[0][5] = new Bishop(Color.BIANCO, 0, 5, 3);
+		board[0][6] = new Knight(Color.BIANCO, 0, 6, 3);
+		board[0][7] = new Rook(Color.BIANCO, 0, 7, 5);
+
 		for (int i = 0; i < getColumnsnumber(); i++) {
-			board[1][i] = new Pawn(Color.BIANCO, 1, i);
+			board[1][i] = new Pawn(Color.BIANCO, 1, i, 1);
 		}
-	
-		board[7][0] = new Rook(Color.NERO, 7, 0);
-		board[7][1] = new Knight(Color.NERO, 7, 1);
-		board[7][2] = new Bishop(Color.NERO, 7, 2);
-		board[7][3] = new Queen(Color.NERO, 7, 3);
-		board[7][4] = new King(Color.NERO, 7, 4);
-		board[7][5] = new Bishop(Color.NERO, 7, 5);
-		board[7][6] = new Knight(Color.NERO, 7, 6);
-		board[7][7] = new Rook(Color.NERO, 7, 7);
-	
+
+		board[7][0] = new Rook(Color.NERO, 7, 0, 5);
+		board[7][1] = new Knight(Color.NERO, 7, 1, 3);
+		board[7][2] = new Bishop(Color.NERO, 7, 2, 3);
+		board[7][3] = new Queen(Color.NERO, 7, 3, 9);
+		board[7][4] = new King(Color.NERO, 7, 4, 3);
+		board[7][5] = new Bishop(Color.NERO, 7, 5, 3);
+		board[7][6] = new Knight(Color.NERO, 7, 6, 3);
+		board[7][7] = new Rook(Color.NERO, 7, 7, 5);
+
 		for (int i = 0; i < getColumnsnumber(); i++) {
-			board[6][i] = new Pawn(Color.NERO, 6, i);
+			board[6][i] = new Pawn(Color.NERO, 6, i, 1);
 		}
-	
+
 		// Inizializza il resto della scacchiera con pezzi vuoti
 		for (int i = 2; i < 6; i++) {
 			for (int j = 0; j < getColumnsnumber(); j++) {
@@ -94,7 +94,7 @@ public class Board implements Cloneable {
 		}
 	}
 
-	public void displayBoard() { //TODO Display e try catch eccezione
+	public void displayBoard() { // TODO Display e try catch eccezione
 
 		System.out.println("    0    1   2    3    4    5    6    7");
 		System.out.println("  --------------------------------------  ");
@@ -105,16 +105,15 @@ public class Board implements Cloneable {
 				if (piece == null) {
 					System.out.print("    ");
 				} else {
-					if( i > 0 && i < 7) {
+					if (i > 0 && i < 7) {
 						System.out.print(piece + "" + j);
-					}else {
-						if(j > 4) {
+					} else {
+						if (j > 4) {
 							System.out.print(piece + "2");
-						}
-						else {
+						} else {
 							System.out.print(piece + "1");
 						}
-						
+
 					}
 				}
 				System.out.print(" ");
@@ -146,7 +145,7 @@ public class Board implements Cloneable {
 		int endY = move.getEndYCord();
 		Piece pieceToMove = board[startX][startY];
 		Piece destinationPiece = board[endX][endY];
-		board[startX][startY] = null; //rimuovi dalla posizione di partenza il pezzo
+		board[startX][startY] = null; // rimuovi dalla posizione di partenza il pezzo
 		board[endX][endY] = pieceToMove;
 		pieceToMove.setXCord(endX);
 		pieceToMove.setYCord(endY);
@@ -155,21 +154,20 @@ public class Board implements Cloneable {
 		if (destinationPiece != null) {
 			destinationPiece.setXCord(-1); // Rimuovi il pezzo dalla scacchiera impostando le coordinate a -1
 			destinationPiece.setYCord(-1);
-			// TODO destinationPiece.setValue=0; per la conta dei pezzi, value attualmente
-			// non presente
+			destinationPiece.setValue(0);
 		}
-        lastMove = move;
+		lastMove = move;
 	}
-	
+
 	public void undoLastMove(Move move) {
 		Piece pieceToMove = board[move.getStartXCord()][move.getStartYCord()];
 		board[move.getStartXCord()][move.getStartYCord()] = null;
 		board[move.getEndXCord()][move.getEndYCord()] = pieceToMove;
 	}
-	
+
 	public Move getLastMove() {
-        return lastMove;
-    }
+		return lastMove;
+	}
 
 	public List<Move> getAvailableMovesByColor(Color color) {
 		List<Move> availableMoves = new ArrayList<>();
@@ -218,13 +216,14 @@ public class Board implements Cloneable {
 		}
 		return isInCheck;
 	}
-	//scacco matto
-    public boolean isCheckMate (Color color, Board board) {
-		//se il re non è in scacco non può esserci scacco matto
+
+	// scacco matto
+	public boolean isCheckMate(Color color, Board board) {
+		// se il re non è in scacco non può esserci scacco matto
 		if (!isKingInCheck(color, board)) {
 			return false;
 		}
-		//ottieni tutte le mosse dei pezzi dello stesso colore del re
+		// ottieni tutte le mosse dei pezzi dello stesso colore del re
 		List<Move> alliesMoves = getAvailableMovesByColor(color);
 		for (Move move : alliesMoves) {
 			Board cloneBoard = this.clone();
@@ -236,31 +235,31 @@ public class Board implements Cloneable {
 		}
 		return true;
 	}
+
 	@Override
 	// TODO non penso sia necessario il try-catch
 	public Board clone() {
-        try {
-            Board cloneBoard = (Board) super.clone();
+		try {
+			Board cloneBoard = (Board) super.clone();
 
-            // Clona l'array bidimensionale di Piece
-            cloneBoard.board = new Piece[columnsNumber][linesNumber];
-            for (int i = 0; i < columnsNumber; i++) {
-                for (int j = 0; j < linesNumber; j++) {
-                    if (this.board[i][j] != null) {
-                        cloneBoard.board[i][j] = this.board[i][j].clone();
-                    }
-                }
-            }
+			// Clona l'array bidimensionale di Piece
+			cloneBoard.board = new Piece[columnsNumber][linesNumber];
+			for (int i = 0; i < columnsNumber; i++) {
+				for (int j = 0; j < linesNumber; j++) {
+					if (this.board[i][j] != null) {
+						cloneBoard.board[i][j] = this.board[i][j].clone();
+					}
+				}
+			}
 
-            // Ora gli oggetti Piece all'interno dell'array sono stati clonati
+			// Ora gli oggetti Piece all'interno dell'array sono stati clonati
 
-            return cloneBoard;
-        } catch (CloneNotSupportedException e) {
-            // Gestisci l'eccezione se la classe non supporta la clonazione
-            e.printStackTrace();
-            return null;
+			return cloneBoard;
+		} catch (CloneNotSupportedException e) {
+			// Gestisci l'eccezione se la classe non supporta la clonazione
+			e.printStackTrace();
+			return null;
 
-        }
-    }
+		}
+	}
 }
-

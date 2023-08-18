@@ -7,8 +7,8 @@ import it.univaq.disim.service.Board;
 
 public class Rook extends Piece {
 
-	public Rook(Color color, int xCord, int yCord) {
-        super(color, xCord, yCord);
+	public Rook(Color color, int xCord, int yCord, int value) {
+        super(color, xCord, yCord, value);
     }
 
 	@Override
