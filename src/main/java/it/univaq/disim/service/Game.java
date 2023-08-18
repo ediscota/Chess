@@ -5,15 +5,16 @@ import java.util.LinkedList;
 import it.univaq.disim.datamodel.Color;
 import it.univaq.disim.datamodel.Move;
 import it.univaq.disim.datamodel.Piece;
+import java.io.Serializable;
 
 import org.apache.commons.collections4.*;
 
-public class Game {
+public class Game implements Serializable{
     private Player whitePlayer;
     private Player blackPlayer;
     private Board board;
-    protected LinkedList<Move> whiteMoves = new LinkedList<>();
-    protected LinkedList<Move> blackMoves = new LinkedList<>();
+    private LinkedList<Move> whiteMoves = new LinkedList<>();
+    private LinkedList<Move> blackMoves = new LinkedList<>();
     private Player currentPlayer;
     private LinkedList<Piece> deadPieces;
     private int movesCount = 0;
