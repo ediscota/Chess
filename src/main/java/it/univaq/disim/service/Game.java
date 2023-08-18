@@ -12,8 +12,8 @@ public class Game {
     private Player whitePlayer;
     private Player blackPlayer;
     private Board board;
-    private LinkedList<Move> whiteMoves = new LinkedList<>();
-    private LinkedList<Move> blackMoves = new LinkedList<>();
+    protected LinkedList<Move> whiteMoves = new LinkedList<>();
+    protected LinkedList<Move> blackMoves = new LinkedList<>();
     private Player currentPlayer;
     private LinkedList<Piece> deadPieces;
     private int movesCount = 0;
@@ -118,5 +118,6 @@ public class Game {
     public int getMovesCount() {
         return this.movesCount;
     }
-
+    
+    
 }
