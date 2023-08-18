@@ -25,7 +25,8 @@ public class Board implements Cloneable {
 
 	private Piece[][] board = new Piece[8][8];
 	private List<Move> getAcailableMovesByColor;
-
+	private Piece deadPiece;
+	
 	public static int getLinesnumber() {
 		return linesNumber;
 	}

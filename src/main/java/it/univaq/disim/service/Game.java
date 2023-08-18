@@ -16,7 +16,8 @@ public class Game implements Serializable{
     private LinkedList<Move> whiteMoves = new LinkedList<>();
     private LinkedList<Move> blackMoves = new LinkedList<>();
     private Player currentPlayer;
-    private LinkedList<Piece> deadPieces;
+    private LinkedList<Piece> deadWhitePieces = new LinkedList<>();
+    private LinkedList<Piece> deadBlackPieces = new LinkedList<>();
 
     /*
      * public Game(Player whitePlayer, Player blackPlayer, Board board) {
@@ -32,7 +33,12 @@ public class Game implements Serializable{
     public LinkedList<Move> getWhiteMoves() {
         return this.whiteMoves;
     }
-
+    public LinkedList<Piece> getDeadWhiteMoves() {
+        return this.deadWhitePieces;
+    }
+    public LinkedList<Piece> getDeadBlackMoves() {
+        return this.deadBlackPieces;
+    }
     public Player getCurrentPlayer() {
         return this.currentPlayer;
     }
@@ -114,7 +120,6 @@ public class Game implements Serializable{
 	        }
         }
         currentPlayer = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer;
-        System.out.print(currentPlayer.getColor());
     }
 
     

@@ -68,8 +68,10 @@ public class HumanPlayer extends Player {
         
         if (game.getCurrentPlayer().getColor() == Color.BIANCO) {
             game.getWhiteMoves().add(board.getLastMove());  // Aggiungi mossa bianca
+            //game.getDeadWhiteMoves.add();
         } else {
             game.getBlackMoves().add(board.getLastMove());  // Aggiungi mossa nera
+            //game.getDeadBlackMoves.add();
         }
     }
     }
