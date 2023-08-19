@@ -21,11 +21,9 @@ import lombok.Data;
 public class Board implements Cloneable {
 	private static final int columnsNumber = 8;
 	private static final int linesNumber = 8;
-	private Move lastMove;
 
 	private Piece[][] board = new Piece[8][8];
 	private List<Move> getAcailableMovesByColor;
-	private Piece deadPiece;
 	
 	public static int getLinesnumber() {
 		return linesNumber;
@@ -157,17 +155,14 @@ public class Board implements Cloneable {
 			destinationPiece.setYCord(-1);
 			destinationPiece.setValue(0);
 		}
-		lastMove = move;
 	}
 
 	public void undoLastMove(Move move) {
 		Piece pieceToMove = board[move.getStartXCord()][move.getStartYCord()];
 		board[move.getStartXCord()][move.getStartYCord()] = null;
 		board[move.getEndXCord()][move.getEndYCord()] = pieceToMove;
-	}
-
-	public Move getLastMove() {
-		return lastMove;
+		pieceToMove.setXCord(move.getEndXCord());
+		pieceToMove.setYCord(move.getEndYCord());
 	}
 
 	public List<Move> getAvailableMovesByColor(Color color) {

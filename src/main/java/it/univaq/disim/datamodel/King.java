@@ -29,9 +29,12 @@ public class King extends Piece {
 			int newY = yCord + dir[1];
 			if (board.isValidLocation(newX, newY)){
 			Piece pieceAtDestination = board.getPieceAt(newX, newY);
-			if (pieceAtDestination == null || pieceAtDestination.getColor() != this.getColor()) {
+			if (pieceAtDestination == null) {
 
-				availableMoves.add(new Move(xCord, yCord, newX, newY));
+				availableMoves.add(new Move(xCord, yCord, newX, newY, false));
+			}
+			else if(pieceAtDestination.getColor() != this.getColor()) {
+				availableMoves.add(new Move(xCord, yCord, newX, newY, true));
 			}
 		}
 	}

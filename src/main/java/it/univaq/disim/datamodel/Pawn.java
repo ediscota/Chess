@@ -38,13 +38,13 @@ public class Pawn extends Piece {
 		int endXCord = xCord + direction;
 
 		if (board.getPieceAt(endXCord,yCord) == null && board.isValidLocation(endXCord, yCord)) {
-			availableMoves.add(new Move(xCord, yCord, endXCord, yCord));
+			availableMoves.add(new Move(xCord, yCord, endXCord, yCord, false));
 			
 			 // controllo per mossa doppia all'inizio
 	        if ((direction == 1 && xCord == 1) || (direction == -1 && xCord == 6)) {
 	            int doubleMove = xCord + 2 * direction;
 	            if (board.getPieceAt(doubleMove, yCord) == null) {
-	                availableMoves.add(new Move(xCord, yCord, doubleMove, yCord));
+	                availableMoves.add(new Move(xCord, yCord, doubleMove, yCord, false));
 	            }
 	        }
 		}
@@ -72,13 +72,13 @@ public class Pawn extends Piece {
 		if (board.isValidLocation(newYCattura, newX1)) {
 			Piece destinationPiece1 = board.getPieceAt(newYCattura, newX1);
 			if (destinationPiece1 != null && destinationPiece1.getColor() != this.getColor()) {
-				availableMoves.add(new Move(xCord, yCord, newYCattura, newX1));
+				availableMoves.add(new Move(xCord, yCord, newYCattura, newX1, true));
 			}
 		}
 		if (board.isValidLocation(newYCattura, newX2)) {
 			Piece destinationPiece2 = board.getPieceAt(newYCattura, newX2);
 			if (destinationPiece2 != null && destinationPiece2.getColor() != this.getColor()) {
-				availableMoves.add(new Move(xCord, yCord, newYCattura, newX2));
+				availableMoves.add(new Move(xCord, yCord, newYCattura, newX2, true));
 			}
 				
 				

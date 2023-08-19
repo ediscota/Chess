@@ -40,8 +40,12 @@ public class Queen extends Piece {
 			while (board.isValidLocation(newX, newY)) {
 				destinationPiece = board.getPieceAt(newX, newY);
 
-				if (destinationPiece == null || destinationPiece.getColor() != this.getColor()) {
-					availableMoves.add(new Move(xCord, yCord, newX, newY));
+				if (destinationPiece == null) {
+
+					availableMoves.add(new Move(xCord, yCord, newX, newY, false));
+				}
+				else if(destinationPiece.getColor() != this.getColor()) {
+					availableMoves.add(new Move(xCord, yCord, newX, newY, true));
 				}
 
 				if (destinationPiece != null) {

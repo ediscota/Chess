@@ -64,15 +64,22 @@ public class HumanPlayer extends Player {
     
         // Step 4: Esegui la mossa
         
-        board.applyMove(selectedMove);
+        
         
         if (game.getCurrentPlayer().getColor() == Color.BIANCO) {
-            game.getWhiteMoves().add(board.getLastMove());  // Aggiungi mossa bianca
-            //game.getDeadWhiteMoves.add();
+            game.getWhiteMoves().add(selectedMove);  // Aggiungi mossa bianca
+            if(selectedMove.isCapture()) {
+            	Piece deadPiece = board.getPieceAt(selectedMove.getEndXCord(), selectedMove.getEndYCord());
+            	game.getDeadBlackMoves().add(deadPiece); // aggiunta pezzo nero mangiato
+            }
         } else {
-            game.getBlackMoves().add(board.getLastMove());  // Aggiungi mossa nera
-            //game.getDeadBlackMoves.add();
+            game.getBlackMoves().add(selectedMove);  // Aggiungi mossa nera
+            if(selectedMove.isCapture()) {
+            	Piece deadPiece = board.getPieceAt(selectedMove.getEndXCord(), selectedMove.getEndYCord());
+            	game.getDeadWhiteMoves().add(deadPiece); //aggiunta pezzo bianco mangiato
+            }
         }
+        board.applyMove(selectedMove);
     }
     }
       

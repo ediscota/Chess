@@ -109,10 +109,10 @@ public class Rook extends Piece {
         Piece targetPiece = board.getPieceAt(xCord, yCord);
 
         if (targetPiece == null) {
-            moves.add(new Move(getXCord(), getYCord(), xCord, yCord));
+            moves.add(new Move(getXCord(), getYCord(), xCord, yCord, false));
             return true;
         } else if (targetPiece.getColor() != getColor()) {
-            moves.add(new Move(getXCord(), getYCord(), xCord, yCord));
+            moves.add(new Move(getXCord(), getYCord(), xCord, yCord, true));
             return false;
         } else {
             return false;

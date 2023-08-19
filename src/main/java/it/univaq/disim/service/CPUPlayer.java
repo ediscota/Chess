@@ -30,7 +30,13 @@ public class CPUPlayer extends Player {
             if (!availableMoves.isEmpty()) {
                 int randomIndex = random.nextInt(availableMoves.size());
                 Move randomMove = availableMoves.get(randomIndex);
+                game.getBlackMoves().add(randomMove); //aggiunta mossa nera
+                if(randomMove.isCapture()) {
+                	Piece deadPiece = board.getPieceAt(randomMove.getEndXCord(), randomMove.getEndYCord());
+                	game.getDeadWhiteMoves().add(deadPiece); //aggiunta pezzo bianco mangiato
+                }
                 board.applyMove(randomMove);
+                
                 return; 
             }
         }

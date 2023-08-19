@@ -2,9 +2,16 @@ package it.univaq.disim.service;
 
 import java.util.List;
 import java.util.LinkedList;
+
+import it.univaq.disim.datamodel.Bishop;
 import it.univaq.disim.datamodel.Color;
+import it.univaq.disim.datamodel.Knight;
 import it.univaq.disim.datamodel.Move;
+import it.univaq.disim.datamodel.Pawn;
 import it.univaq.disim.datamodel.Piece;
+import it.univaq.disim.datamodel.Queen;
+import it.univaq.disim.datamodel.Rook;
+
 import java.io.Serializable;
 
 import org.apache.commons.collections4.*;
@@ -104,6 +111,7 @@ public class Game implements Serializable{
     public void undoMoves(Board board, int numberMoves) {
         for (int i = 0; i < numberMoves; i++) {
 	        Move lastMoveWhite, lastMoveBlack, undoMoveBlack = new Move(), undoMoveWhite = new Move();
+	        Piece lastDeadPiece;
 	        if (!blackMoves.isEmpty() && !whiteMoves.isEmpty()) {
 	            lastMoveWhite = whiteMoves.remove(whiteMoves.size() - 1);
 	            lastMoveBlack = blackMoves.remove(blackMoves.size() - 1);
@@ -115,9 +123,79 @@ public class Game implements Serializable{
 	            undoMoveBlack.setStartYCord(lastMoveBlack.getEndYCord());
 	            undoMoveBlack.setEndXCord(lastMoveBlack.getStartXCord());
 	            undoMoveBlack.setEndYCord(lastMoveBlack.getStartYCord());
-	            board.undoLastMove(undoMoveBlack);
-	            board.undoLastMove(undoMoveWhite);
+	            if(currentPlayer.getColor() == Color.BIANCO) {
+		            board.undoLastMove(undoMoveBlack);
+		            if(lastMoveBlack.isCapture()) {
+		            	lastDeadPiece = deadWhitePieces.remove(deadWhitePieces.size()-1);
+		            	board.getBoard()[lastMoveBlack.getEndXCord()][lastMoveBlack.getEndYCord()] = lastDeadPiece;
+		            	lastDeadPiece.setXCord(lastMoveBlack.getEndXCord());
+		            	lastDeadPiece.setYCord(lastMoveBlack.getEndYCord());
+		            	if(lastDeadPiece instanceof Pawn)
+		            		lastDeadPiece.setValue(1);
+		            	else if(lastDeadPiece instanceof Rook)
+		            		lastDeadPiece.setValue(5);
+		            	else if(lastDeadPiece instanceof Knight || lastDeadPiece instanceof Bishop)
+		            		lastDeadPiece.setValue(3);
+		            	else if(lastDeadPiece instanceof Queen)
+		            		lastDeadPiece.setValue(9);
+			        }
+		            
+		            
+		            board.undoLastMove(undoMoveWhite);		            
+		            if(lastMoveWhite.isCapture()) {
+		            	lastDeadPiece = deadBlackPieces.remove(deadBlackPieces.size()-1);
+		            	board.getBoard()[lastMoveWhite.getEndXCord()][lastMoveWhite.getEndYCord()] = lastDeadPiece;
+		            	lastDeadPiece.setXCord(lastMoveWhite.getEndXCord());
+		            	lastDeadPiece.setYCord(lastMoveWhite.getEndYCord());
+		            	if(lastDeadPiece instanceof Pawn)
+		            		lastDeadPiece.setValue(1);
+		            	else if(lastDeadPiece instanceof Rook)
+		            		lastDeadPiece.setValue(5);
+		            	else if(lastDeadPiece instanceof Knight || lastDeadPiece instanceof Bishop)
+		            		lastDeadPiece.setValue(3);
+		            	else if(lastDeadPiece instanceof Queen)
+		            		lastDeadPiece.setValue(9);
+			        }
+	            }
+	            else {
+	            	board.undoLastMove(undoMoveWhite);
+	            	if(lastMoveWhite.isCapture()) {
+		            	lastDeadPiece = deadBlackPieces.remove(deadBlackPieces.size()-1);
+		            	board.getBoard()[lastMoveWhite.getEndXCord()][lastMoveWhite.getEndYCord()] = lastDeadPiece;
+		            	lastDeadPiece.setXCord(lastMoveWhite.getEndXCord());
+		            	lastDeadPiece.setYCord(lastMoveWhite.getEndYCord());
+		            	if(lastDeadPiece instanceof Pawn)
+		            		lastDeadPiece.setValue(1);
+		            	else if(lastDeadPiece instanceof Rook)
+		            		lastDeadPiece.setValue(5);
+		            	else if(lastDeadPiece instanceof Knight || lastDeadPiece instanceof Bishop)
+		            		lastDeadPiece.setValue(3);
+		            	else if(lastDeadPiece instanceof Queen)
+		            		lastDeadPiece.setValue(9);
+			        }
+	            	
+	            	board.undoLastMove(undoMoveBlack);
+	            	if(lastMoveBlack.isCapture()) {
+		            	lastDeadPiece = deadWhitePieces.remove(deadWhitePieces.size()-1);
+		            	board.getBoard()[lastMoveBlack.getEndXCord()][lastMoveBlack.getEndYCord()] = lastDeadPiece;
+		            	lastDeadPiece.setXCord(lastMoveBlack.getEndXCord());
+		            	lastDeadPiece.setYCord(lastMoveBlack.getEndYCord());
+		            	if(lastDeadPiece instanceof Pawn)
+		            		lastDeadPiece.setValue(1);
+		            	else if(lastDeadPiece instanceof Rook)
+		            		lastDeadPiece.setValue(5);
+		            	else if(lastDeadPiece instanceof Knight || lastDeadPiece instanceof Bishop)
+		            		lastDeadPiece.setValue(3);
+		            	else if(lastDeadPiece instanceof Queen)
+		            		lastDeadPiece.setValue(9);
+		            	//System.out.print(lastDeadPiece.getXCord()+ " , "+ lastDeadPiece.getYCord());
+			        }
+	            }
+	            
 	        }
+	        
+	        	
+	        	
         }
         currentPlayer = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer;
     }

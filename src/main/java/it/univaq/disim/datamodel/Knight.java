@@ -30,10 +30,12 @@ public class Knight extends Piece {
 			int y = yCord + move[1];
 			if (board.isValidLocation(x, y)) {
 				Piece pieceAtDestination = board.getPieceAt(x, y);
-				if (pieceAtDestination == null || pieceAtDestination.getColor() != this.getColor()) {
+				if (pieceAtDestination == null) {
 
-					availableMoves.add(new Move(xCord, yCord, x, y));
-
+					availableMoves.add(new Move(xCord, yCord, x, y, false));
+				}
+				else if(pieceAtDestination.getColor() != this.getColor()) {
+					availableMoves.add(new Move(xCord, yCord, x, y, true));
 				}
 			}
 		}

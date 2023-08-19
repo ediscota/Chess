@@ -33,9 +33,9 @@ public class Bishop extends Piece {
 				Piece pieceAtDestination = board.getPieceAt(x, y);
 				
 				if (pieceAtDestination == null) {
-					availableMoves.add(new Move(xCord, yCord, x, y));
+					availableMoves.add(new Move(xCord, yCord, x, y, false));
 				} else if (pieceAtDestination.getColor() != this.getColor()) {
-					availableMoves.add(new Move(xCord, yCord, x, y));
+					availableMoves.add(new Move(xCord, yCord, x, y, true));
 					break;
 				} else {
 					break;  // Esci dal ciclo se trovi un pezzo dello stesso colore
