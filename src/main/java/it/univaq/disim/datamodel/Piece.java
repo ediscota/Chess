@@ -1,13 +1,15 @@
 package it.univaq.disim.datamodel;
 
+import java.io.Serializable;
 import java.util.List;
 
 import it.univaq.disim.service.Board;
 import lombok.Data;
 
 @Data
-public abstract class Piece implements Cloneable {
+public abstract class Piece implements Cloneable, Serializable {
 
+	private static final long serialVersionUID = 5027965187758086632L;
 	private int xCord;
 	private int yCord;
 	private int value;

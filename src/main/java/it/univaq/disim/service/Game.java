@@ -17,6 +17,8 @@ import java.io.Serializable;
 import org.apache.commons.collections4.*;
 
 public class Game implements Serializable{
+	
+	private static final long serialVersionUID = -3457753419113559690L;
     private Player whitePlayer;
     private Player blackPlayer;
     private Board board;
@@ -200,6 +202,30 @@ public class Game implements Serializable{
         currentPlayer = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer;
     }
 
+    
+    public Board getBoard() {
+		return this.board;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
+	public Player getBlackPlayer() {
+		return blackPlayer;
+	}
+
+	public void setBlackPlayer(Player blackPlayer) {
+		this.blackPlayer = blackPlayer;
+	}
+
+	public Player getWhitePlayer() {
+		return whitePlayer;
+	}
+
+	public void setWhitePlayer(Player whitePlayer) {
+		this.whitePlayer = whitePlayer;
+	}
     
     
 }

@@ -1,5 +1,6 @@
 package it.univaq.disim.service;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,7 +19,9 @@ import it.univaq.disim.datamodel.Rook;
 import lombok.Data;
 
 @Data
-public class Board implements Cloneable {
+public class Board implements Cloneable, Serializable {
+	
+	private static final long serialVersionUID = -5189619093542858077L;
 	private static final int columnsNumber = 8;
 	private static final int linesNumber = 8;
 

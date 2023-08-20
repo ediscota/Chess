@@ -1,13 +1,16 @@
 package it.univaq.disim.datamodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import it.univaq.disim.service.Board;
 
-public class Pawn extends Piece {
+public class Pawn extends Piece implements Serializable {
 	
 
+	private static final long serialVersionUID = -511250831636830991L;
+	
 	public Pawn(Color color, int xCord, int yCord, int value) {
 		super(color, xCord, yCord, value);
 	}

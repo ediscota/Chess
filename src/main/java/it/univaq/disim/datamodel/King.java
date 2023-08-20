@@ -1,12 +1,15 @@
 package it.univaq.disim.datamodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import it.univaq.disim.service.Board;
 
-public class King extends Piece {
-
+public class King extends Piece implements Serializable{
+	
+	private static final long serialVersionUID = 2642370088677062127L;
+	
 	public King(Color color, int xCord, int yCord, int value) {
         super(color, xCord, yCord, value);
     }

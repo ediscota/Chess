@@ -1,15 +1,18 @@
 package it.univaq.disim.datamodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import it.univaq.disim.service.Board;
 
-public class Queen extends Piece {
+public class Queen extends Piece implements Serializable {
 	public Queen(Color color, int xCord, int yCord, int value) {
 		super(color, xCord, yCord, value);
 	}
 
+	private static final long serialVersionUID = 574327588593668986L;
+	
 	@Override
 	public String toString() {
 		if (this.getColor() == Color.BIANCO) {

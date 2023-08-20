@@ -1,9 +1,13 @@
 package it.univaq.disim.datamodel;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class Move {
+public class Move implements Serializable{
+	
+	private static final long serialVersionUID = -2053292465717212393L;
     private int startXCord;
     private int startYCord;
     private int endXCord;

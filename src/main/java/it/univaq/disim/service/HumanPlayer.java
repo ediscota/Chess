@@ -2,18 +2,21 @@ package it.univaq.disim.service;
 
 import java.util.List;
 import java.util.Scanner;
+import java.io.Serializable;
 
 import it.univaq.disim.datamodel.Color;
 import it.univaq.disim.datamodel.Move;
 import it.univaq.disim.datamodel.Piece;
 
-public class HumanPlayer extends Player {
+public class HumanPlayer extends Player implements Serializable {
 	
 
     public HumanPlayer(Color color) {
         super(color);
 
     }
+    
+    private static final long serialVersionUID = 1L;
 
     @Override
     public void makeMove(Board board, Game game) throws IllegalArgumentException{
@@ -22,7 +25,8 @@ public class HumanPlayer extends Player {
         // Step 1: Richiedi all'utente di selezionare un pezzo
         if(!game.getBlackMoves().isEmpty() && !game.getWhiteMoves().isEmpty())
         	System.out.print("premi 9 per annullare le mosse, oppure ");
-        System.out.print("Seleziona il pezzo da muovere (riga colonna): ");
+        System.out.println("Seleziona il pezzo da muovere (riga colonna): ");
+        System.out.print("premi 8 per salvare la partita");
         int x = scanner.nextInt();
         if(x == 9 && !game.getBlackMoves().isEmpty() && !game.getWhiteMoves().isEmpty()) {
         	System.out.println("Quante mosse vuoi annullare? (al massimo le ultime 5)");
@@ -33,6 +37,17 @@ public class HumanPlayer extends Player {
         		throw new IllegalArgumentException("non ci sono abbastanza mosse da annullare");        		
         	game.undoMoves(board, numberMoves);
         	return;
+        }
+        
+        if(x == 8) {
+        	Save save = new Save();
+			try {
+				save.serialize(game,board,this);
+			} catch (ClassNotFoundException e) {
+				
+				e.printStackTrace();
+			}
+			return;
         }
         
         

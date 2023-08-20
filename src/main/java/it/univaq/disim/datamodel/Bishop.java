@@ -1,12 +1,15 @@
 package it.univaq.disim.datamodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import it.univaq.disim.service.Board;
 
-public class Bishop extends Piece {
-
+public class Bishop extends Piece implements Serializable {
+	
+	private static final long serialVersionUID = 9022810192548993956L;
+	
 	public Bishop(Color color, int xCord, int yCord, int value) {
         super(color, xCord, yCord, value);
     }
