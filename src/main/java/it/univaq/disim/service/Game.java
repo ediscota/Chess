@@ -19,8 +19,8 @@ import org.apache.commons.collections4.*;
 public class Game implements Serializable{
 	
 	private static final long serialVersionUID = -3457753419113559690L;
-    public Player whitePlayer;
-    public Player blackPlayer;
+    private Player whitePlayer;
+    private Player blackPlayer;
     private Board board;
     private LinkedList<Move> whiteMoves = new LinkedList<>();
     private LinkedList<Move> blackMoves = new LinkedList<>();
@@ -42,10 +42,10 @@ public class Game implements Serializable{
     public LinkedList<Move> getWhiteMoves() {
         return this.whiteMoves;
     }
-    public LinkedList<Piece> getDeadWhiteMoves() {
+    public LinkedList<Piece> getDeadWhitePieces() {
         return this.deadWhitePieces;
     }
-    public LinkedList<Piece> getDeadBlackMoves() {
+    public LinkedList<Piece> getDeadBlackPieces() {
         return this.deadBlackPieces;
     }
     public Player getCurrentPlayer() {

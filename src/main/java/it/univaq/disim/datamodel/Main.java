@@ -13,7 +13,8 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Scegli la modalità di gioco\n"
 				+ "1 - inizia una nuova partita\n"
-				+ "2 - carica una partita\n");
+				+ "2 - carica una partita\n"
+				+ "3 - statistiche partite\n");
 		int choice = scanner.nextInt();
 		
 		switch(choice)
@@ -80,6 +81,11 @@ public class Main {
 				e.printStackTrace();
 			}
 			break;
+		
+		case 3: 
+			
+			
+			
 		}
 
 		

@@ -33,7 +33,7 @@ public class CPUPlayer extends Player {
                 game.getBlackMoves().add(randomMove); //aggiunta mossa nera
                 if(randomMove.isCapture()) {
                 	Piece deadPiece = board.getPieceAt(randomMove.getEndXCord(), randomMove.getEndYCord());
-                	game.getDeadWhiteMoves().add(deadPiece); //aggiunta pezzo bianco mangiato
+                	game.getDeadWhitePieces().add(deadPiece); //aggiunta pezzo bianco mangiato
                 }
                 board.applyMove(randomMove);
                 

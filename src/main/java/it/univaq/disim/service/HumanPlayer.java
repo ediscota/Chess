@@ -85,13 +85,13 @@ public class HumanPlayer extends Player implements Serializable {
             game.getWhiteMoves().add(selectedMove);  // Aggiungi mossa bianca
             if(selectedMove.isCapture()) {
             	Piece deadPiece = board.getPieceAt(selectedMove.getEndXCord(), selectedMove.getEndYCord());
-            	game.getDeadBlackMoves().add(deadPiece); // aggiunta pezzo nero mangiato
+            	game.getDeadBlackPieces().add(deadPiece); // aggiunta pezzo nero mangiato
             }
         } else {
             game.getBlackMoves().add(selectedMove);  // Aggiungi mossa nera
             if(selectedMove.isCapture()) {
             	Piece deadPiece = board.getPieceAt(selectedMove.getEndXCord(), selectedMove.getEndYCord());
-            	game.getDeadWhiteMoves().add(deadPiece); //aggiunta pezzo bianco mangiato
+            	game.getDeadWhitePieces().add(deadPiece); //aggiunta pezzo bianco mangiato
             }
         }
         board.applyMove(selectedMove);
