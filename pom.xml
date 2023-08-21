@@ -18,4 +18,20 @@
     </dependency>
   </dependencies>
   
+  <build>
+  <plugins>
+    
+    <plugin>
+    	<groupId>org.codehaus.mojo</groupId>
+    	<artifactId>exec-maven-plugin</artifactId>
+    	<version>3.1.0</version>
+    	<configuration>
+    		<mainClass>it.univaq.disim.datamodel.Main</mainClass>
+    	</configuration>
+    </plugin>
+</plugins>
+</build>
+
+
+  
 </project>
