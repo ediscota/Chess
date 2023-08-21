@@ -15,7 +15,7 @@ public class Save implements Serializable{
 	
 	private static final long serialVersionUID = 6194243878039641792L;
 
-	public void serialize(Game g,Board b, HumanPlayer h) throws ClassNotFoundException{
+	public void serialize(Game g,Board b,HumanPlayer p1, HumanPlayer p2) throws ClassNotFoundException{
 		
 		String folderPath = "C:\\Users\\matte\\OneDrive\\Documenti\\GitHub\\scacchi-ddc\\partite";
 		
@@ -28,7 +28,8 @@ public class Save implements Serializable{
         	ObjectOutputStream oos = new ObjectOutputStream(fos);
         	oos.writeObject(g);
         	oos.writeObject(b);
-        	oos.writeObject(h);
+        	oos.writeObject(p1);
+        	oos.writeObject(p2);
         	
         } catch (IOException e) {
         	e.printStackTrace();
@@ -45,11 +46,13 @@ public class Save implements Serializable{
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			Game g = (Game) ois.readObject();
 			Board b = (Board) ois.readObject();
-			HumanPlayer h = (HumanPlayer) ois.readObject();
+			HumanPlayer p1 = (HumanPlayer) ois.readObject();
+			HumanPlayer p2 = (HumanPlayer) ois.readObject();
 			
-			b.displayBoard();
 			
-			h.makeMove(b,g);
+			
+			g.playGame(b, p1, p2);
+			
 			
 		} catch (IOException e) {
 			

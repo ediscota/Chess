@@ -42,7 +42,7 @@ public class HumanPlayer extends Player implements Serializable {
         if(x == 8) {
         	Save save = new Save();
 			try {
-				save.serialize(game,board,this);
+				save.serialize(game,board,this,this);
 			} catch (ClassNotFoundException e) {
 				
 				e.printStackTrace();
