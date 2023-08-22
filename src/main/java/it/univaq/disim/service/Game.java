@@ -27,7 +27,8 @@ public class Game implements Serializable{
     private Player currentPlayer;
     private LinkedList<Piece> deadWhitePieces = new LinkedList<>();
     private LinkedList<Piece> deadBlackPieces = new LinkedList<>();
-
+    private int drawMovesCounter;
+    boolean isGameOver;
     /*
      * public Game(Player whitePlayer, Player blackPlayer, Board board) {
      * this.whitePlayer = whitePlayer;
@@ -69,9 +70,10 @@ public class Game implements Serializable{
     }
 
     public void playGame(Board board, Player whitePlayer, Player blackPlayer) {
-        boolean isGameOver = false;
+        isGameOver = false;
         currentPlayer = whitePlayer;
         Player winner = null;
+        drawMovesCounter = 0;
 
         while (!isGameOver) {
             board.displayBoard();
@@ -102,8 +104,12 @@ public class Game implements Serializable{
                 	System.out.println(e.getMessage());
                 }
             }
+            if(this.drawMovesCounter >= 50) {
+            	isGameOver = true;
+            	System.out.println("partita finita in patta per la regola delle 50 mosse");
+            }
         }
-
+        
         if (winner != null) {
             System.out.println("Il giocatore " + winner.getColor().toString() + " ha vinto.");
 
@@ -190,7 +196,6 @@ public class Game implements Serializable{
 		            		lastDeadPiece.setValue(3);
 		            	else if(lastDeadPiece instanceof Queen)
 		            		lastDeadPiece.setValue(9);
-		            	//System.out.print(lastDeadPiece.getXCord()+ " , "+ lastDeadPiece.getYCord());
 			        }
 	            }
 	            
@@ -201,8 +206,25 @@ public class Game implements Serializable{
         }
         currentPlayer = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer;
     }
-
     
+    public void resetDrawMovesCounter() {
+    	this.drawMovesCounter = 0;
+    }
+    
+    public void addDrawMovesCounter() {
+    	this.drawMovesCounter++;
+    }
+    public boolean isCapturedOrPawnMove(Move move, Board board) {
+    	if(move.isCapture() || board.getPieceAt(move.getStartXCord(), move.getStartYCord()) instanceof Pawn)
+    		return true;
+    	return false;
+    }
+    
+    public void surrender() {
+    	isGameOver = true;
+    	System.out.print("Giocatore " + this.getCurrentPlayer().getColor() + " ti sei arreso, "
+    			+ "Giocatore " + this.getCurrentPlayer().getColor().oppositeColor() + " hai vinto!");
+    }
     public Board getBoard() {
 		return this.board;
 	}

@@ -35,6 +35,11 @@ public class CPUPlayer extends Player {
                 	Piece deadPiece = board.getPieceAt(randomMove.getEndXCord(), randomMove.getEndYCord());
                 	game.getDeadWhitePieces().add(deadPiece); //aggiunta pezzo bianco mangiato
                 }
+                
+                game.addDrawMovesCounter();
+                if(game.isCapturedOrPawnMove(randomMove, board))
+                	game.resetDrawMovesCounter();
+                
                 board.applyMove(randomMove);
                 
                 return; 

@@ -26,8 +26,13 @@ public class HumanPlayer extends Player implements Serializable {
         if(!game.getBlackMoves().isEmpty() && !game.getWhiteMoves().isEmpty())
         	System.out.print("premi 9 per annullare le mosse, oppure ");
         System.out.println("Seleziona il pezzo da muovere (riga colonna): ");
-        System.out.print("premi 8 per salvare la partita");
+        System.out.println("premi 8 per salvare la partita");
+        System.out.println("premi 10 per arrenderti");
         int x = scanner.nextInt();
+        if(x == 10) {
+        	game.surrender();
+        	return;
+        }
         if(x == 9 && !game.getBlackMoves().isEmpty() && !game.getWhiteMoves().isEmpty()) {
         	System.out.println("Quante mosse vuoi annullare? (al massimo le ultime 5)");
         	int numberMoves = scanner.nextInt();
@@ -62,12 +67,16 @@ public class HumanPlayer extends Player implements Serializable {
     
         // Step 2: Ottieni le mosse disponibili per il pezzo selezionato
         List<Move> availableMoves = selectedPiece.getAvailableMoves(board, x, y);
+        
+        if(availableMoves.isEmpty())
+        	throw new IllegalArgumentException("nessuna mossa disponibile per il pezzo selezionato");
     
         // Step 3: Chiedi all'utente di selezionare una mossa dalla lista
         System.out.println("Mosse disponibili:");
         for (int i = 0; i < availableMoves.size(); i++) {
             System.out.println(i + ": " + availableMoves.get(i).toString());
         }
+        
         System.out.print("Seleziona la mossa da eseguire (index): ");
         int selectedMoveIndex = scanner.nextInt();
     
@@ -76,6 +85,10 @@ public class HumanPlayer extends Player implements Serializable {
         }
     
         Move selectedMove = availableMoves.get(selectedMoveIndex);
+        
+        game.addDrawMovesCounter();
+        if(game.isCapturedOrPawnMove(selectedMove, board))
+        	game.resetDrawMovesCounter();
     
         // Step 4: Esegui la mossa
         
