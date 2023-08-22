@@ -3,13 +3,14 @@ package it.univaq.disim.datamodel;
 import it.univaq.disim.service.Board;
 import it.univaq.disim.service.Save;
 import java.io.File;
+import it.univaq.disim.service.Statistic;
 
 import it.univaq.disim.service.Game;
 import java.util.*;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException {
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Scegli la modalità di gioco\n"
 				+ "1 - inizia una nuova partita\n"
@@ -84,13 +85,10 @@ public class Main {
 		
 		case 3: 
 			
-			
+			Statistic statistic = new Statistic();
+			statistic.statistic();
 			
 		}
-
-		
-		
-		
           
 	}                
 

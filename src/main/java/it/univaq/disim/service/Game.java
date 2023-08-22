@@ -227,8 +227,5 @@ public class Game implements Serializable{
 		this.whitePlayer = whitePlayer;
 	}
     
-	public void loadGame(Board board) {
-		
-	}
     
 }
