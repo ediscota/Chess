@@ -12,8 +12,6 @@ public class Statistic implements Serializable {
 	
 	private static final long serialVersionUID = -8374799742368830313L;
 	
-	private Game[] deserializeGames;
-	
 	public void statistic() throws ClassNotFoundException {
 		
 		String directoryPath = "C:\\Users\\matte\\OneDrive\\Documenti\\GitHub\\scacchi-ddc\\partite"; 
@@ -22,6 +20,7 @@ public class Statistic implements Serializable {
     
 		if (directory.exists() && directory.isDirectory()) {
 			File[] files = directory.listFiles();
+			Game[] deserializeGames = new Game[files.length];
 			
 			for(int i = 0; i < files.length; ++i) {
 				
@@ -32,17 +31,17 @@ public class Statistic implements Serializable {
 					Game g = (Game) ois.readObject();
 					
 					deserializeGames [ i ] = g;
-					
-					mergeSort(deserializeGames, 0, deserializeGames.length - 1);
-
-			        System.out.println("Partite ordinate in base alle mosse: " + Arrays.toString(deserializeGames));
-					
+			      
 				} catch (IOException e) {
 					
 					e.printStackTrace();
 				}
 				
 			}
+			
+			mergeSort(deserializeGames, 0, deserializeGames.length - 1);
+
+	        System.out.println("Partite ordinate in base alle mosse: " + Arrays.toString(deserializeGames));
 
 		}
 	}
