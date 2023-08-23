@@ -121,6 +121,11 @@ public class Rook extends Piece implements Serializable {
             return false;
         }
     }
+    
+    public int getValue() {
+		
+			return 5;
+		}
 
 }
 

@@ -43,4 +43,9 @@ public class King extends Piece implements Serializable{
 	}
 		return availableMoves;
 	}
+
+	public int getValue() {
+	
+		return 9;
+	}
 }

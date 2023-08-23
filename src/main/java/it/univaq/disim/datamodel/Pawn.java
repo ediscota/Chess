@@ -88,5 +88,10 @@ public class Pawn extends Piece implements Serializable {
 		}
 		return availableMoves;
 	}
+	
+	public int getValue() {
+		
+			return 1;
+		}
 
 }

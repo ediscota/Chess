@@ -7,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.Arrays;
 
+import it.univaq.disim.datamodel.Piece;
+
 public class Statistic implements Serializable {
 	
 	
@@ -45,8 +47,12 @@ public class Statistic implements Serializable {
 	        
 	        mergeSort1(deserializeGames, 0, deserializeGames.length - 1);
 	        
-	        System.out.println("Partite ordinate in base alle mosse: " + Arrays.toString(deserializeGames));
-
+	        System.out.println("Partite ordinate in base alla quantità di pezzi: " + Arrays.toString(deserializeGames));
+	        
+	        mergeSort2(deserializeGames, 0, deserializeGames.length - 1);
+	        
+	        System.out.println("Partite ordinate in base al valore dei pezzi: " + Arrays.toString(deserializeGames));
+	        
 		}
 	}
 			
@@ -152,7 +158,57 @@ public class Statistic implements Serializable {
 	            j++;
 	            k++;
 	        }
+	    }	    
+	    
+	    public static void mergeSort2(Game[] deserializeGames, int left, int right) {
+	        if (left < right) {
+	            int middle = (left + right) / 2;
+
+	            mergeSort(deserializeGames, left, middle);
+	            mergeSort(deserializeGames, middle + 1, right);
+
+	            merge2(deserializeGames, left, middle, right);
+	        }
 	    }
-				
+
+	    public static void merge2(Game[] deserializeGames, int left, int middle, int right) {
+	        int n1 = middle - left + 1;
+	        int n2 = right - middle;
+
+	        Game[] leftArray = new Game[n1];
+	        Game[] rightArray = new Game[n2];
+
+	        for (int i = 0; i < n1; i++) {
+	            leftArray[i] = deserializeGames[left + i];
+	        }
+	        for (int j = 0; j < n2; j++) {
+	            rightArray[j] = deserializeGames[middle + 1 + j];
+	        }
+
+	        int i = 0, j = 0, k = left;
+
+	        while (i < n1 && j < n2) {
+	            if (leftArray[i].valuePieces(leftArray[i], i) <  rightArray[j].valuePieces(rightArray[j], j)) {
+	            	deserializeGames[k] = leftArray[i];
+	                i++;
+	            } else {
+	            	deserializeGames[k] = rightArray[j];
+	                j++;
+	            }
+	            k++;
+	        }
+
+	        while (i < n1) {
+	        	deserializeGames[k] = leftArray[i];
+	            i++;
+	            k++;
+	        }
+
+	        while (j < n2) {
+	        	deserializeGames[k] = rightArray[j];
+	            j++;
+	            k++;
+	        }
+	    }		
 }	
 

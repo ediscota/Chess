@@ -51,5 +51,10 @@ public class Bishop extends Piece implements Serializable {
 	
 		return availableMoves;
 	}
+	
+	public int getValue() {
+		
+		return 3;
+	}
 
 }

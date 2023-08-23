@@ -63,5 +63,10 @@ public class Queen extends Piece implements Serializable {
 
 		return availableMoves;
 	}
+	
+	public int getValue() {
+		
+			return 9;
+		}
 
 }

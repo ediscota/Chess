@@ -249,5 +249,39 @@ public class Game implements Serializable{
 		this.whitePlayer = whitePlayer;
 	}
     
-    
+	public int valuePieces(Game game,int x) {
+    	
+    	int c = 48;
+    	
+    	for (Piece elemento : game.getDeadBlackPieces()) {
+	            
+	            switch(elemento.getValue()) {
+	            
+	            case 1 :
+	            	
+	            	c = c - 1;
+	            	break;
+	            	
+	            case 3 :
+	            	
+	            	c = c - 3;
+	            	break;
+	            	
+	            case 5 :
+	            	
+	            	c = c - 5;
+	            	break;
+	            	
+	            case 9 :
+	            	
+	            	c = c - 9;
+	            	break;
+	            
+	            }
+	            
+	        }
+    	
+    	return c;
+    		
+    }
 }
