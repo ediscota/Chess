@@ -62,30 +62,30 @@ public class Board implements Cloneable, Serializable {
 
 	public void initializeBoard() {
 		// Inizializza la scacchiera posizionando i pezzi correttamente
-		board[0][0] = new Rook(Color.BIANCO, 0, 0, 5);
-		board[0][1] = new Knight(Color.BIANCO, 0, 1, 3);
-		board[0][2] = new Bishop(Color.BIANCO, 0, 2, 3);
-		board[0][3] = new Queen(Color.BIANCO, 0, 3, 9);
-		board[0][4] = new King(Color.BIANCO, 0, 4, 0);
-		board[0][5] = new Bishop(Color.BIANCO, 0, 5, 3);
-		board[0][6] = new Knight(Color.BIANCO, 0, 6, 3);
-		board[0][7] = new Rook(Color.BIANCO, 0, 7, 5);
+		board[0][0] = new Rook(Color.NERO, 0, 0, 5);
+		board[0][1] = new Knight(Color.NERO, 0, 1, 3);
+		board[0][2] = new Bishop(Color.NERO, 0, 2, 3);
+		board[0][3] = new Queen(Color.NERO, 0, 3, 9);
+		board[0][4] = new King(Color.NERO, 0, 4, 0);
+		board[0][5] = new Bishop(Color.NERO, 0, 5, 3);
+		board[0][6] = new Knight(Color.NERO, 0, 6, 3);
+		board[0][7] = new Rook(Color.NERO, 0, 7, 5);
 
 		for (int i = 0; i < getColumnsnumber(); i++) {
-			board[1][i] = new Pawn(Color.BIANCO, 1, i, 1);
+			board[1][i] = new Pawn(Color.NERO, 1, i, 1);
 		}
 
-		board[7][0] = new Rook(Color.NERO, 7, 0, 5);
-		board[7][1] = new Knight(Color.NERO, 7, 1, 3);
-		board[7][2] = new Bishop(Color.NERO, 7, 2, 3);
-		board[7][3] = new Queen(Color.NERO, 7, 3, 9);
-		board[7][4] = new King(Color.NERO, 7, 4, 3);
-		board[7][5] = new Bishop(Color.NERO, 7, 5, 3);
-		board[7][6] = new Knight(Color.NERO, 7, 6, 3);
-		board[7][7] = new Rook(Color.NERO, 7, 7, 5);
+		board[7][0] = new Rook(Color.BIANCO, 7, 0, 5);
+		board[7][1] = new Knight(Color.BIANCO, 7, 1, 3);
+		board[7][2] = new Bishop(Color.BIANCO, 7, 2, 3);
+		board[7][3] = new Queen(Color.BIANCO, 7, 3, 9);
+		board[7][4] = new King(Color.BIANCO, 7, 4, 3);
+		board[7][5] = new Bishop(Color.BIANCO, 7, 5, 3);
+		board[7][6] = new Knight(Color.BIANCO, 7, 6, 3);
+		board[7][7] = new Rook(Color.BIANCO, 7, 7, 5);
 
 		for (int i = 0; i < getColumnsnumber(); i++) {
-			board[6][i] = new Pawn(Color.NERO, 6, i, 1);
+			board[6][i] = new Pawn(Color.BIANCO, 6, i, 1);
 		}
 
 		// Inizializza il resto della scacchiera con pezzi vuoti

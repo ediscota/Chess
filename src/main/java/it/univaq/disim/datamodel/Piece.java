@@ -37,5 +37,16 @@ public abstract class Piece implements Cloneable, Serializable {
 		this.yCord = yCord;
 		this.value = value;
 	}
-
+	
+	public int getValueFromInstanceOf()
+    {
+    	if(this instanceof Pawn)
+    		return 1;
+    	else if(this instanceof Rook)
+    		return 5;
+    	else if(this instanceof Knight || this instanceof Bishop)
+    		return 3;
+    	else
+    		return 9;
+    }
 }

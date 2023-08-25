@@ -138,14 +138,7 @@ public class Game implements Serializable{
 		            	board.getBoard()[lastMoveBlack.getEndXCord()][lastMoveBlack.getEndYCord()] = lastDeadPiece;
 		            	lastDeadPiece.setXCord(lastMoveBlack.getEndXCord());
 		            	lastDeadPiece.setYCord(lastMoveBlack.getEndYCord());
-		            	if(lastDeadPiece instanceof Pawn)
-		            		lastDeadPiece.setValue(1);
-		            	else if(lastDeadPiece instanceof Rook)
-		            		lastDeadPiece.setValue(5);
-		            	else if(lastDeadPiece instanceof Knight || lastDeadPiece instanceof Bishop)
-		            		lastDeadPiece.setValue(3);
-		            	else if(lastDeadPiece instanceof Queen)
-		            		lastDeadPiece.setValue(9);
+		            	lastDeadPiece.setValue(lastDeadPiece.getValueFromInstanceOf());
 			        }
 		            
 		            
@@ -155,14 +148,7 @@ public class Game implements Serializable{
 		            	board.getBoard()[lastMoveWhite.getEndXCord()][lastMoveWhite.getEndYCord()] = lastDeadPiece;
 		            	lastDeadPiece.setXCord(lastMoveWhite.getEndXCord());
 		            	lastDeadPiece.setYCord(lastMoveWhite.getEndYCord());
-		            	if(lastDeadPiece instanceof Pawn)
-		            		lastDeadPiece.setValue(1);
-		            	else if(lastDeadPiece instanceof Rook)
-		            		lastDeadPiece.setValue(5);
-		            	else if(lastDeadPiece instanceof Knight || lastDeadPiece instanceof Bishop)
-		            		lastDeadPiece.setValue(3);
-		            	else if(lastDeadPiece instanceof Queen)
-		            		lastDeadPiece.setValue(9);
+		            	lastDeadPiece.setValue(lastDeadPiece.getValueFromInstanceOf());
 			        }
 	            }
 	            else {
@@ -172,14 +158,7 @@ public class Game implements Serializable{
 		            	board.getBoard()[lastMoveWhite.getEndXCord()][lastMoveWhite.getEndYCord()] = lastDeadPiece;
 		            	lastDeadPiece.setXCord(lastMoveWhite.getEndXCord());
 		            	lastDeadPiece.setYCord(lastMoveWhite.getEndYCord());
-		            	if(lastDeadPiece instanceof Pawn)
-		            		lastDeadPiece.setValue(1);
-		            	else if(lastDeadPiece instanceof Rook)
-		            		lastDeadPiece.setValue(5);
-		            	else if(lastDeadPiece instanceof Knight || lastDeadPiece instanceof Bishop)
-		            		lastDeadPiece.setValue(3);
-		            	else if(lastDeadPiece instanceof Queen)
-		            		lastDeadPiece.setValue(9);
+		            	lastDeadPiece.setValue(lastDeadPiece.getValueFromInstanceOf());
 			        }
 	            	
 	            	board.undoLastMove(undoMoveBlack);
@@ -188,24 +167,19 @@ public class Game implements Serializable{
 		            	board.getBoard()[lastMoveBlack.getEndXCord()][lastMoveBlack.getEndYCord()] = lastDeadPiece;
 		            	lastDeadPiece.setXCord(lastMoveBlack.getEndXCord());
 		            	lastDeadPiece.setYCord(lastMoveBlack.getEndYCord());
-		            	if(lastDeadPiece instanceof Pawn)
-		            		lastDeadPiece.setValue(1);
-		            	else if(lastDeadPiece instanceof Rook)
-		            		lastDeadPiece.setValue(5);
-		            	else if(lastDeadPiece instanceof Knight || lastDeadPiece instanceof Bishop)
-		            		lastDeadPiece.setValue(3);
-		            	else if(lastDeadPiece instanceof Queen)
-		            		lastDeadPiece.setValue(9);
+		            	lastDeadPiece.setValue(lastDeadPiece.getValueFromInstanceOf());
 			        }
 	            }
 	            
 	        }
 	        
 	        	
-	        	
+	            	
         }
+        
         currentPlayer = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer;
     }
+    
     
     public void resetDrawMovesCounter() {
     	this.drawMovesCounter = 0;

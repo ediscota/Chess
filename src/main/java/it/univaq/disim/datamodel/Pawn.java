@@ -29,7 +29,7 @@ public class Pawn extends Piece implements Serializable {
 
 		List<Move> availableMoves = new ArrayList<>();
 
-		int direction = (this.getColor() == Color.BIANCO) ? 1 : -1;
+		int direction = (this.getColor() == Color.BIANCO) ? -1 : 1;
 
 		
 		/*int endYCord = yCord + direction;

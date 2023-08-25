@@ -12,13 +12,14 @@ public class Main {
 
 	public static void main(String[] args) throws ClassNotFoundException {
 		Scanner scanner = new Scanner(System.in);
-		System.out.print("Scegli la modalità di gioco\n"
+		
+		 System.out.print("Scegli la modalità di gioco\n"
 				+ "1 - inizia una nuova partita\n"
 				+ "2 - carica una partita\n"
 				+ "3 - statistiche partite\n");
-		int choice = scanner.nextInt();
+		 int choice = scanner.nextInt();
 		
-		switch(choice)
+		 switch(choice)
 		{
 		case 1:
 			Game game = new Game();
@@ -32,6 +33,8 @@ public class Main {
 				break;
 			case 2:
 				game.startNewCPUGame();
+				break;
+			default:
 				break;
 			}			
 			break;
@@ -87,6 +90,10 @@ public class Main {
 			
 			Statistic statistic = new Statistic();
 			statistic.statistic();
+			break;
+			
+		default: 
+			break;
 			
 		}
           
