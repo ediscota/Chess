@@ -39,51 +39,10 @@ public class Main {
 			}			
 			break;
 		case 2:
-			String directoryPath = "C:\\Users\\matte\\OneDrive\\Documenti\\GitHub\\scacchi-ddc\\partite"; 
-
-	        File directory = new File(directoryPath);
-	        
-			if (directory.exists() && directory.isDirectory()) {
-	            File[] files = directory.listFiles();
-
-	            if (files != null) {
-	                System.out.println("Lista di file nella directory:");
-	                
-	                int c=0;
-	                for (File file : files) {
-	                    if (file.isFile()) {
-	                        System.out.println(c + ":" + file.getName());
-	                        c++;
-	                    }
-	                }
-	            } else {
-	                System.out.println("La directory è vuota.");
-	            }
-	        } else {
-	            System.out.println("La directory non esiste o non è valida.");
-	        }
-			
-			System.out.println("Seleziona partita da recuperare");
-			int choice3 = scanner.nextInt();
-			File[] files = directory.listFiles();
-			File f=null;
-			for (int i = 0 ; i < files.length ; i++) {
-				
-				if(i == choice3) {
-					f = files[i];
-				}
-				
-			}
-			
-			System.out.println("hai selezionato : " + f.getName());
 			
 			Save save = new Save();
-			try {
-				save.deserialize(f);
-			} catch (ClassNotFoundException e) {
-				
-				e.printStackTrace();
-			}
+			save.printFile(scanner);
+			
 			break;
 		
 		case 3: 

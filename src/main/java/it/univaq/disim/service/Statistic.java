@@ -7,8 +7,6 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.Arrays;
 
-import it.univaq.disim.datamodel.Piece;
-
 public class Statistic implements Serializable {
 	
 	
