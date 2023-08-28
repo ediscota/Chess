@@ -16,9 +16,10 @@ public abstract class Piece implements Cloneable, Serializable {
 	protected Color color;
 
 	private List<Move> availableMoves;
-
+/**
+ *    Restituisce l'elenco di mosse disponibili per il pezzo selezionato
+ */
 	public abstract List<Move> getAvailableMoves(Board board, int xCord, int yCord);
-	// public abstract List<Move> getAvailableMoves(Board board);
 
 	@Override
 	public Piece clone() {

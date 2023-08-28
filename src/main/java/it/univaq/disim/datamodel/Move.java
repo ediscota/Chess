@@ -23,7 +23,7 @@ public class Move implements Serializable{
 	}
 	
     public Move() {
-		// TODO Auto-generated constructor stub
+      
 	}
 
 	@Override

@@ -1,20 +1,20 @@
 package it.univaq.disim.service;
 
-import java.util.List;
+
 import java.util.LinkedList;
 
-import it.univaq.disim.datamodel.Bishop;
+
 import it.univaq.disim.datamodel.Color;
-import it.univaq.disim.datamodel.Knight;
+
 import it.univaq.disim.datamodel.Move;
 import it.univaq.disim.datamodel.Pawn;
 import it.univaq.disim.datamodel.Piece;
-import it.univaq.disim.datamodel.Queen;
-import it.univaq.disim.datamodel.Rook;
+
+
 
 import java.io.Serializable;
 
-import org.apache.commons.collections4.*;
+
 
 public class Game implements Serializable{
 	
@@ -52,7 +52,9 @@ public class Game implements Serializable{
     public Player getCurrentPlayer() {
         return this.currentPlayer;
     }
-
+/**
+ * Crea istanze HumanPlayer e CPUPlayer, crea istanza Board e la inizializza, e con questi parametri chiama il metodo playGame 
+ */
     public void startNewCPUGame() {
         Player whitePlayer = new HumanPlayer(Color.BIANCO);
         Player blackPlayer = new CPUPlayer(Color.NERO);
@@ -68,7 +70,9 @@ public class Game implements Serializable{
         board.initializeBoard();
         playGame(board, whitePlayer, blackPlayer);
     }
-
+/** 
+ * Metodo che gestisce la logica del gioco degli scacchi
+ */
     public void playGame(Board board, Player whitePlayer, Player blackPlayer) {
         isGameOver = false;
         currentPlayer = whitePlayer;
@@ -77,7 +81,7 @@ public class Game implements Serializable{
 
         while (!isGameOver) {
             board.displayBoard();
-            // Controlla se nel turno precedente l'avversario non abbia salvato il proprio
+            // Controlla se nel turno precedente l'avversario non sia riuscito a salvare il proprio
             // Re
             if (board.isKingInCheck(currentPlayer.getColor().oppositeColor(), board)) {
                 System.out.println("Giocatore " + currentPlayer.getColor().oppositeColor().toString()

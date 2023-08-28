@@ -2,11 +2,7 @@ package it.univaq.disim.service;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-
-import org.apache.commons.collections4.*;
-
 import it.univaq.disim.datamodel.Bishop;
 import it.univaq.disim.datamodel.Color;
 import it.univaq.disim.datamodel.King;
@@ -26,7 +22,7 @@ public class Board implements Cloneable, Serializable {
 	private static final int linesNumber = 8;
 
 	private Piece[][] board = new Piece[8][8];
-	private List<Move> getAcailableMovesByColor;
+	private List<Move> getAvailableMovesByColor;
 	
 	public static int getLinesnumber() {
 		return linesNumber;
@@ -36,7 +32,7 @@ public class Board implements Cloneable, Serializable {
 		return columnsNumber;
 	}
 
-	// prende in input una posizione e controlla se è valida
+	/** prende in input una posizione e controlla se è valida */
 	public boolean isValidLocation(int x, int y) {
 
 		if (x < 0 || x >= Board.columnsNumber || y < 0 || y >= Board.linesNumber)
@@ -46,10 +42,11 @@ public class Board implements Cloneable, Serializable {
 
 	}
 
-	// prende in input una locazione, prima controlla se è valida tramite
-	// isValidLocation, poi restituisce il pezzo che
-	// corrisponde a quelle coordinate, oppure se la posizione non è valida lancia
-	// una eccezione
+	/**
+	 * richiede le coordinate, e restituisce il pezzo in quella posizione 
+	 * @return pezzo alla posizione selezionata
+	 * @throws IllegalArgumentException
+	 */
 	public Piece getPieceAt(int x, int y) throws IllegalArgumentException {
 
 		if (isValidLocation(x, y))
@@ -60,6 +57,9 @@ public class Board implements Cloneable, Serializable {
 
 	}
 
+	/**
+	 * Inizializza la scacchiera posizionando ogni pezzo nella posizione giusta
+	 */
 	public void initializeBoard() {
 		// Inizializza la scacchiera posizionando i pezzi correttamente
 		board[0][0] = new Rook(Color.NERO, 0, 0, 5);
@@ -96,13 +96,14 @@ public class Board implements Cloneable, Serializable {
 		}
 	}
 
-	public void displayBoard() { // TODO Display e try catch eccezione
+	/** Stampa sulla console la scacchiera */
+	public void displayBoard() { 
 
 		System.out.println("    0    1   2    3    4    5    6    7");
 		System.out.println("  --------------------------------------  ");
-		for (int i = 0; i < getLinesnumber(); i++) {
+		for (int i = 0; i < Board.linesNumber; i++) {
 			System.out.print((0 + i) + "|");
-			for (int j = 0; j < getColumnsnumber(); j++) {
+			for (int j = 0; j < Board.columnsNumber; j++) {
 				Piece piece = board[i][j];
 				if (piece == null) {
 					System.out.print("    ");
@@ -126,6 +127,9 @@ public class Board implements Cloneable, Serializable {
 		System.out.println("    0    1   2    3    4    5    6    7");
 	}
 
+	/**
+	 restituisce l'elenco dei pezzi nella scacchiera di un dato colore
+	 */ 
 	public List<Piece> getPiecesByColor(Color playerColor) {
 		List<Piece> piecesByColor = new ArrayList<>();
 		for (int x = 0; x < Board.columnsNumber; x++) {
@@ -140,6 +144,9 @@ public class Board implements Cloneable, Serializable {
 		return piecesByColor;
 	}
 
+	/**
+	 * Applica la mossa da eseguire, aggiornando lo stato della scacchiera
+	 */
 	public void applyMove(Move move) {
 		int startX = move.getStartXCord();
 		int startY = move.getStartYCord();
@@ -154,9 +161,9 @@ public class Board implements Cloneable, Serializable {
 		// Se la mossa è una mossa di cattura, rimuovi il pezzo catturato dalla
 		// scacchiera
 		if (destinationPiece != null) {
-			destinationPiece.setXCord(-1); // Rimuovi il pezzo dalla scacchiera impostando le coordinate a -1
+			destinationPiece.setXCord(-1); // Rimuovi il pezzo catturato dalla scacchiera impostando le coordinate a -1
 			destinationPiece.setYCord(-1);
-			destinationPiece.setValue(0);
+			destinationPiece.setValue(0); //Setta il valore del pezzo catturato a 0
 		}
 	}
 
@@ -167,12 +174,14 @@ public class Board implements Cloneable, Serializable {
 		pieceToMove.setXCord(move.getEndXCord());
 		pieceToMove.setYCord(move.getEndYCord());
 	}
-
+/**
+ * Restituisce la lista di tutte le mosse disponibili di un giocatore di un determinato colore
+ */
 	public List<Move> getAvailableMovesByColor(Color color) {
 		List<Move> availableMoves = new ArrayList<>();
 
-		for (int x = 0; x < columnsNumber; x++) {
-			for (int y = 0; y < linesNumber; y++) {
+		for (int x = 0; x < Board.columnsNumber; x++) {
+			for (int y = 0; y < Board.linesNumber; y++) {
 				Piece piece = board[x][y];
 				if (piece != null && piece.getColor() == color) {
 					List<Move> pieceMoves = piece.getAvailableMoves(this, x, y);
@@ -201,10 +210,9 @@ public class Board implements Cloneable, Serializable {
 				}
 			}
 		}
-		// prima si controlla se il re è nella scacchiera, in caso positivo si controlla
-		// se è minacciato da mosse avversarie
 		if (!kingFound)
 			return false;
+		// Controlla se il Re è minacciato da mosse avversarie
 		List<Move> opponentMoves = board.getAvailableMovesByColor(color.oppositeColor());
 		for (Move move : opponentMoves) {
 			if (move.getEndXCord() == kingX && move.getEndYCord() == kingY) {
@@ -216,9 +224,11 @@ public class Board implements Cloneable, Serializable {
 		return isInCheck;
 	}
 
-	// scacco matto
+	/**
+	 * Controlla se c'è lo scacco matto	 
+	 */
 	public boolean isCheckMate(Color color, Board board) {
-		// se il re non è in scacco non può esserci scacco matto
+		// se il re non è sotto scacco non può esserci scacco matto
 		if (!isKingInCheck(color, board)) {
 			return false;
 		}
@@ -236,7 +246,6 @@ public class Board implements Cloneable, Serializable {
 	}
 
 	@Override
-	// TODO non penso sia necessario il try-catch
 	public Board clone() {
 		try {
 			Board cloneBoard = (Board) super.clone();
@@ -251,11 +260,8 @@ public class Board implements Cloneable, Serializable {
 				}
 			}
 
-			// Ora gli oggetti Piece all'interno dell'array sono stati clonati
-
 			return cloneBoard;
 		} catch (CloneNotSupportedException e) {
-			// Gestisci l'eccezione se la classe non supporta la clonazione
 			e.printStackTrace();
 			return null;
 

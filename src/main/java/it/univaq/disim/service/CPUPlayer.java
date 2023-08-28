@@ -13,7 +13,9 @@ public class CPUPlayer extends Player {
         super(color);
 
     }
-
+/**
+ * Seleziona un pezzo casuale del colore del giocatore del turno corrente, e applica una mossa casuale dall'elenco di mosse disponibili
+ */
     @Override
     public void makeMove(Board board, Game game) {
   Color playerColor = this.getColor();

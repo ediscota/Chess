@@ -17,7 +17,9 @@ public class HumanPlayer extends Player implements Serializable {
     }
     
     private static final long serialVersionUID = 1L;
-
+/** 
+* Richiede la selezione di coordinate, crea la mossa con tali informazioni e successivamente la esegue
+*/
     @Override
     public void makeMove(Board board, Game game) throws IllegalArgumentException{
         Scanner scanner = new Scanner(System.in);
@@ -77,7 +79,7 @@ public class HumanPlayer extends Player implements Serializable {
             System.out.println(i + ": " + availableMoves.get(i).toString());
         }
         
-        System.out.print("Seleziona la mossa da eseguire (index): ");
+        System.out.print("Seleziona la mossa da eseguire (indice): ");
         int selectedMoveIndex = scanner.nextInt();
     
         if (selectedMoveIndex < 0 || selectedMoveIndex >= availableMoves.size()) {
