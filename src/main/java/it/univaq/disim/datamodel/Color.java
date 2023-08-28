@@ -1,6 +1,8 @@
 package it.univaq.disim.datamodel;
 
-public enum Color {
+import java.io.Serializable;
+
+public enum Color implements Serializable{
 	BIANCO, NERO;
 
    public Color oppositeColor (){

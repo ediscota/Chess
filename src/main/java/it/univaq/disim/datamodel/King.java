@@ -1,14 +1,17 @@
 package it.univaq.disim.datamodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import it.univaq.disim.service.Board;
 
-public class King extends Piece {
-
-	public King(Color color, int xCord, int yCord) {
-        super(color, xCord, yCord);
+public class King extends Piece implements Serializable{
+	
+	private static final long serialVersionUID = 2642370088677062127L;
+	
+	public King(Color color, int xCord, int yCord, int value) {
+        super(color, xCord, yCord, value);
     }
 	@Override
 	public String toString() {
@@ -29,12 +32,20 @@ public class King extends Piece {
 			int newY = yCord + dir[1];
 			if (board.isValidLocation(newX, newY)){
 			Piece pieceAtDestination = board.getPieceAt(newX, newY);
-			if (pieceAtDestination == null || pieceAtDestination.getColor() != this.getColor()) {
+			if (pieceAtDestination == null) {
 
-				availableMoves.add(new Move(xCord, yCord, newX, newY));
+				availableMoves.add(new Move(xCord, yCord, newX, newY, false));
+			}
+			else if(pieceAtDestination.getColor() != this.getColor()) {
+				availableMoves.add(new Move(xCord, yCord, newX, newY, true));
 			}
 		}
 	}
 		return availableMoves;
+	}
+
+	public int getValue() {
+	
+		return 9;
 	}
 }

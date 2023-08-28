@@ -1,14 +1,17 @@
 package it.univaq.disim.datamodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import it.univaq.disim.service.Board;
 
-public class Bishop extends Piece {
-
-	public Bishop(Color color, int xCord, int yCord) {
-        super(color, xCord, yCord);
+public class Bishop extends Piece implements Serializable {
+	
+	private static final long serialVersionUID = 9022810192548993956L;
+	
+	public Bishop(Color color, int xCord, int yCord, int value) {
+        super(color, xCord, yCord, value);
     }
 
 	@Override
@@ -33,9 +36,9 @@ public class Bishop extends Piece {
 				Piece pieceAtDestination = board.getPieceAt(x, y);
 				
 				if (pieceAtDestination == null) {
-					availableMoves.add(new Move(xCord, yCord, x, y));
+					availableMoves.add(new Move(xCord, yCord, x, y, false));
 				} else if (pieceAtDestination.getColor() != this.getColor()) {
-					availableMoves.add(new Move(xCord, yCord, x, y));
+					availableMoves.add(new Move(xCord, yCord, x, y, true));
 					break;
 				} else {
 					break;  // Esci dal ciclo se trovi un pezzo dello stesso colore
@@ -47,6 +50,11 @@ public class Bishop extends Piece {
 		}
 	
 		return availableMoves;
+	}
+	
+	public int getValue() {
+		
+		return 3;
 	}
 
 }

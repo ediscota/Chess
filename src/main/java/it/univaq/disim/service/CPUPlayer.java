@@ -15,7 +15,7 @@ public class CPUPlayer extends Player {
     }
 
     @Override
-    public void makeMove(Board board) {
+    public void makeMove(Board board, Game game) {
   Color playerColor = this.getColor();
         List<Piece> pieces = board.getPiecesByColor(playerColor);
           Random random = new Random();
@@ -30,7 +30,18 @@ public class CPUPlayer extends Player {
             if (!availableMoves.isEmpty()) {
                 int randomIndex = random.nextInt(availableMoves.size());
                 Move randomMove = availableMoves.get(randomIndex);
+                game.getBlackMoves().add(randomMove); //aggiunta mossa nera
+                if(randomMove.isCapture()) {
+                	Piece deadPiece = board.getPieceAt(randomMove.getEndXCord(), randomMove.getEndYCord());
+                	game.getDeadWhitePieces().add(deadPiece); //aggiunta pezzo bianco mangiato
+                }
+                
+                game.addDrawMovesCounter();
+                if(game.isCapturedOrPawnMove(randomMove, board))
+                	game.resetDrawMovesCounter();
+                
                 board.applyMove(randomMove);
+                
                 return; 
             }
         }

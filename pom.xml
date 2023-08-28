@@ -11,6 +11,27 @@
     	<version>1.18.20</version>
     	<scope>provided</scope>
 </dependency>
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-collections4</artifactId>
+        <version>4.4</version>
+    </dependency>
   </dependencies>
+  
+  <build>
+  <plugins>
+    
+    <plugin>
+    	<groupId>org.codehaus.mojo</groupId>
+    	<artifactId>exec-maven-plugin</artifactId>
+    	<version>3.1.0</version>
+    	<configuration>
+    		<mainClass>it.univaq.disim.datamodel.Main</mainClass>
+    	</configuration>
+    </plugin>
+</plugins>
+</build>
+
+
   
 </project>
