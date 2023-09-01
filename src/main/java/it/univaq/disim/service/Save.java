@@ -15,10 +15,15 @@ import java.util.Scanner;
 public class Save implements Serializable{
 	
 	private static final long serialVersionUID = 6194243878039641792L;
+	String folderPath = "C:\\Users\\matte\\OneDrive\\Documenti\\GitHub\\scacchi-ddc\\partite"; 
+	
+	/**   il metodo serialize prende come parametri i valori necessaria pre serializzare una partita e ricaricarla senza perdere
+	 *    le modifiche per rendere il codice portatile bisogna inserire com folderPath il percorso del pc locale dove è salvato
+	 *    il programma
+	 */
 
 	public void serialize(Game g,Board b,HumanPlayer p1, HumanPlayer p2) throws ClassNotFoundException{
 		
-		String folderPath = "C:\\Users\\matte\\OneDrive\\Documenti\\GitHub\\scacchi-ddc\\partite";
 		
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH-mm-ss");
@@ -40,6 +45,10 @@ public class Save implements Serializable{
         
         	
 	}
+	
+	/**
+	 *  il metodo deserialize ci permette di deserializzare un file e ripartire dal punto dove si era salvata la partita 
+	 */
 	
 	public void deserialize(File file) throws  ClassNotFoundException {
         
@@ -63,11 +72,15 @@ public class Save implements Serializable{
 		}
 	}
 	
+	/**
+	 * 	il metodo printFile ci presenta un layout per sceggliere il file da deserializzare e richiama
+	 *  il metodo deserialize
+	 */
+	
 	public void printFile(Scanner scanner) {
 		
-		String directoryPath = "C:\\Users\\matte\\OneDrive\\Documenti\\GitHub\\scacchi-ddc\\partite"; 
 
-        File directory = new File(directoryPath);
+        File directory = new File(folderPath);
         
 		if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();

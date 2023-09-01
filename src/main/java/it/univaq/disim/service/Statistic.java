@@ -12,6 +12,11 @@ public class Statistic implements Serializable {
 	
 	private static final long serialVersionUID = -8374799742368830313L;
 	
+	/**
+	 *  il metodo statistic prende i file salvati nella directory partite le inserisce in un array di Game
+	 *  e poi richiama vari metodi ognuno per ordinare l'array in base a determinati valori
+	 */
+	
 	public void statistic() throws ClassNotFoundException {
 		
 		String directoryPath = "C:\\Users\\matte\\OneDrive\\Documenti\\GitHub\\scacchi-ddc\\partite"; 
@@ -53,7 +58,9 @@ public class Statistic implements Serializable {
 	        
 		}
 	}
-			
+		/**
+		 * 	 mergeSort e merge ordinano l'array in base al numero di mosse
+		 */
 			
 	    public static void mergeSort(Game[] deserializeGames, int left, int right) {
 	        if (left < right) {
@@ -107,6 +114,10 @@ public class Statistic implements Serializable {
 	        }
 	    }
 	    
+	    /**
+		 * 	 mergeSort1 e merge1 ordinano l'array in base al numero pezzi sulla scacchiera
+		 */
+	    
 	    public static void mergeSort1(Game[] deserializeGames, int left, int right) {
 	        if (left < right) {
 	            int middle = (left + right) / 2;
@@ -156,7 +167,11 @@ public class Statistic implements Serializable {
 	            j++;
 	            k++;
 	        }
-	    }	    
+	    }	
+	    
+	    /**
+		 * 	 mergeSort2 e merge2 ordinano l'array in base al valore dei pezzi sulla scacchiera
+		 */
 	    
 	    public static void mergeSort2(Game[] deserializeGames, int left, int right) {
 	        if (left < right) {
