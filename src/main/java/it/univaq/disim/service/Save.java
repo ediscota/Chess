@@ -32,11 +32,13 @@ public class Save implements Serializable{
         	oos.writeObject(p1);
         	oos.writeObject(p2);
         	
+        	oos.close();
+        	
         } catch (IOException e) {
         	e.printStackTrace();
         }
         
-       
+        	
 	}
 	
 	public void deserialize(File file) throws  ClassNotFoundException {
