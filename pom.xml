@@ -26,7 +26,7 @@
     	<artifactId>exec-maven-plugin</artifactId>
     	<version>3.1.0</version>
     	<configuration>
-    		<mainClass>it.univaq.disim.datamodel.Main</mainClass>
+    		<mainClass>it.univaq.disim.interazione.Main</mainClass>
     	</configuration>
     </plugin>
 </plugins>

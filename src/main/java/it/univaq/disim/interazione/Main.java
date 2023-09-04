@@ -1,4 +1,4 @@
-package it.univaq.disim.datamodel;
+package it.univaq.disim.interazione;
 
 import it.univaq.disim.service.Board;
 import it.univaq.disim.service.Save;
