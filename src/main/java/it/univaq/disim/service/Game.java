@@ -63,6 +63,9 @@ public class Game implements Serializable{
         playGame(board, whitePlayer, blackPlayer);
     }
 
+    /**
+     * Crea due istanze HumanPlayer, crea istanza Board e la inizializza, e con questi parametri chiama il metodo playGame 
+     */
     public void startNewHumanGame() {
         Player whitePlayer = new HumanPlayer(Color.BIANCO);
         Player blackPlayer = new HumanPlayer(Color.NERO);
@@ -120,6 +123,12 @@ public class Game implements Serializable{
         }
     }
 
+    /**
+     * prende come parametro la board e il numero N di mosse da annullare, e annulla le ultime N 
+     * mosse effettuate
+     * @param board
+     * @param numberMoves
+     */
     public void undoMoves(Board board, int numberMoves) {
         for (int i = 0; i < numberMoves; i++) {
 	        Move lastMoveWhite, lastMoveBlack, undoMoveBlack = new Move(), undoMoveWhite = new Move();
@@ -127,6 +136,9 @@ public class Game implements Serializable{
 	        if (!blackMoves.isEmpty() && !whiteMoves.isEmpty()) {
 	            lastMoveWhite = whiteMoves.remove(whiteMoves.size() - 1);
 	            lastMoveBlack = blackMoves.remove(blackMoves.size() - 1);
+	            
+	            /* vengono settatate le coordinate della mossa da annullare, al contrario 
+	            dell'ultima mossa effettuata */
 	            undoMoveWhite.setStartXCord(lastMoveWhite.getEndXCord());
 	            undoMoveWhite.setStartYCord(lastMoveWhite.getEndYCord());
 	            undoMoveWhite.setEndXCord(lastMoveWhite.getStartXCord());
@@ -136,7 +148,7 @@ public class Game implements Serializable{
 	            undoMoveBlack.setEndXCord(lastMoveBlack.getStartXCord());
 	            undoMoveBlack.setEndYCord(lastMoveBlack.getStartYCord());
 	            if(currentPlayer.getColor() == Color.BIANCO) {
-		            board.undoLastMove(undoMoveBlack);
+		            board.applyMove(undoMoveBlack);
 		            if(lastMoveBlack.isCapture()) {
 		            	lastDeadPiece = deadWhitePieces.remove(deadWhitePieces.size()-1);
 		            	board.getBoard()[lastMoveBlack.getEndXCord()][lastMoveBlack.getEndYCord()] = lastDeadPiece;
@@ -146,7 +158,7 @@ public class Game implements Serializable{
 			        }
 		            
 		            
-		            board.undoLastMove(undoMoveWhite);		            
+		            board.applyMove(undoMoveWhite);		            
 		            if(lastMoveWhite.isCapture()) {
 		            	lastDeadPiece = deadBlackPieces.remove(deadBlackPieces.size()-1);
 		            	board.getBoard()[lastMoveWhite.getEndXCord()][lastMoveWhite.getEndYCord()] = lastDeadPiece;
@@ -156,7 +168,7 @@ public class Game implements Serializable{
 			        }
 	            }
 	            else {
-	            	board.undoLastMove(undoMoveWhite);
+	            	board.applyMove(undoMoveWhite);
 	            	if(lastMoveWhite.isCapture()) {
 		            	lastDeadPiece = deadBlackPieces.remove(deadBlackPieces.size()-1);
 		            	board.getBoard()[lastMoveWhite.getEndXCord()][lastMoveWhite.getEndYCord()] = lastDeadPiece;
@@ -165,7 +177,7 @@ public class Game implements Serializable{
 		            	lastDeadPiece.setValue(lastDeadPiece.getValueFromInstanceOf());
 			        }
 	            	
-	            	board.undoLastMove(undoMoveBlack);
+	            	board.applyMove(undoMoveBlack);
 	            	if(lastMoveBlack.isCapture()) {
 		            	lastDeadPiece = deadWhitePieces.remove(deadWhitePieces.size()-1);
 		            	board.getBoard()[lastMoveBlack.getEndXCord()][lastMoveBlack.getEndYCord()] = lastDeadPiece;
@@ -184,20 +196,36 @@ public class Game implements Serializable{
         currentPlayer = (currentPlayer == whitePlayer) ? blackPlayer : whitePlayer;
     }
     
-    
+    /**
+     * resetta il count delle mosse per il pareggio
+     */
     public void resetDrawMovesCounter() {
     	this.drawMovesCounter = 0;
     }
     
+    /**
+     * aggiorna il count delle mosse per il pareggio
+     */
     public void addDrawMovesCounter() {
     	this.drawMovesCounter++;
     }
+    
+    /**
+     * restituisce true se la mossa 'move' è di cattura e se il pezzo che si trova nella casella che 
+     * ha coordinate uguali alle coordinate iniziali di 'move', è un pedone
+     * @param move
+     * @param board
+     * @return true o false
+     */
     public boolean isCapturedOrPawnMove(Move move, Board board) {
     	if(move.isCapture() || board.getPieceAt(move.getStartXCord(), move.getStartYCord()) instanceof Pawn)
     		return true;
     	return false;
     }
     
+    /**
+     * termina la partita con l'arresa del giocatore corrente
+     */
     public void surrender() {
     	isGameOver = true;
     	System.out.print("Giocatore " + this.getCurrentPlayer().getColor() + " ti sei arreso, "

@@ -30,13 +30,6 @@ public class Pawn extends Piece implements Serializable {
 		List<Move> availableMoves = new ArrayList<>();
 
 		int direction = (this.getColor() == Color.BIANCO) ? -1 : 1;
-
-		
-		/*int endYCord = yCord + direction;
-
-		if (board.isValidLocation(xCord, endYCord)) {
-			availableMoves.add(new Move(xCord, yCord, xCord, endYCord));
-		}*/
 		
 		int endXCord = xCord + direction;
 
@@ -52,22 +45,7 @@ public class Pawn extends Piece implements Serializable {
 	        }
 		}
 		
-		// Controllo mosse di cattura
-		/*int newX1 = xCord + 1;
-		int newX2 = xCord - 1;
-		int newYCattura = yCord + direction;
-		if (board.isValidLocation(newX1, newYCattura)) {
-			Piece destinationPiece1 = board.getPieceAt(newX1, newYCattura);
-			if (destinationPiece1 != null && destinationPiece1.getColor() != this.getColor()) {
-				availableMoves.add(new Move(xCord, yCord, newX1, newYCattura));
-			}
-		}
-		if (board.isValidLocation(newX2, newYCattura)) {
-			Piece destinationPiece2 = board.getPieceAt(newX2, newYCattura);
-			if (destinationPiece2 != null && destinationPiece2.getColor() != this.getColor()) {
-				availableMoves.add(new Move(xCord, yCord, newX2, newYCattura));
-			}*/
-			
+		// Controllo mosse di cattura			
 			
 		int newX1 = yCord + 1;
 		int newX2 = yCord - 1;

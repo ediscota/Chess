@@ -39,6 +39,10 @@ public abstract class Piece implements Cloneable, Serializable {
 		this.value = value;
 	}
 	
+	/**
+	 * restituisce il valore del pezzo in base alla classe a cui appartiene
+	 * @return valore del pezzo
+	 */
 	public int getValueFromInstanceOf()
     {
     	if(this instanceof Pawn)

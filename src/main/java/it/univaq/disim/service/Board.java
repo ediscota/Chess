@@ -167,13 +167,6 @@ public class Board implements Cloneable, Serializable {
 		}
 	}
 
-	public void undoLastMove(Move move) {
-		Piece pieceToMove = board[move.getStartXCord()][move.getStartYCord()];
-		board[move.getStartXCord()][move.getStartYCord()] = null;
-		board[move.getEndXCord()][move.getEndYCord()] = pieceToMove;
-		pieceToMove.setXCord(move.getEndXCord());
-		pieceToMove.setYCord(move.getEndYCord());
-	}
 /**
  * Restituisce la lista di tutte le mosse disponibili di un giocatore di un determinato colore
  */
@@ -193,6 +186,12 @@ public class Board implements Cloneable, Serializable {
 		return availableMoves;
 	}
 
+	/**
+	 * resituisce true se il re è sotto scacco
+	 * @param color
+	 * @param board
+	 * @return true o false
+	 */
 	public boolean isKingInCheck(Color color, Board board) {
 		// inizializzazione delle coordinate del re al di fuori della scacchiera
 		int kingX = -1;
