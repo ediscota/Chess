@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Save implements Serializable{
 	
 	private static final long serialVersionUID = 6194243878039641792L;
-	String folderPath = "C:\\Users\\matte\\OneDrive\\Documenti\\GitHub\\scacchi-ddc\\partite"; 
+	private String folderPath = "C:\\Users\\matte\\OneDrive\\Documenti\\GitHub\\scacchi-ddc\\partite"; 
 	
 	/**   il metodo serialize prende come parametri i valori necessaria pre serializzare una partita e ricaricarla senza perdere
 	 *    le modifiche per rendere il codice portatile bisogna inserire com folderPath il percorso del pc locale dove è salvato
