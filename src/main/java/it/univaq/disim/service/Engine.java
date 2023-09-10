@@ -1,4 +1,5 @@
 package it.univaq.disim.service;
+
 /**
  * Esegue la mossa creata o generata casualmente
  */

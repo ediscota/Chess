@@ -6,13 +6,14 @@ import java.util.List;
 
 import it.univaq.disim.service.Board;
 
-public class King extends Piece implements Serializable{
-	
+public class King extends Piece implements Serializable {
+
 	private static final long serialVersionUID = 2642370088677062127L;
-	
+
 	public King(Color color, int xCord, int yCord, int value) {
-        super(color, xCord, yCord, value);
-    }
+		super(color, xCord, yCord, value);
+	}
+
 	@Override
 	public String toString() {
 		if (this.getColor() == Color.BIANCO) {
@@ -21,7 +22,8 @@ public class King extends Piece implements Serializable{
 			return "r_n";
 		}
 	}
-@Override
+
+	@Override
 	public List<Move> getAvailableMoves(Board board, int xCord, int yCord) {
 		List<Move> availableMoves = new ArrayList<>();
 
@@ -30,22 +32,21 @@ public class King extends Piece implements Serializable{
 		for (int[] dir : directions) {
 			int newX = xCord + dir[0];
 			int newY = yCord + dir[1];
-			if (board.isValidLocation(newX, newY)){
-			Piece pieceAtDestination = board.getPieceAt(newX, newY);
-			if (pieceAtDestination == null) {
+			if (board.isValidLocation(newX, newY)) {
+				Piece pieceAtDestination = board.getPieceAt(newX, newY);
+				if (pieceAtDestination == null) {
 
-				availableMoves.add(new Move(xCord, yCord, newX, newY, false));
-			}
-			else if(pieceAtDestination.getColor() != this.getColor()) {
-				availableMoves.add(new Move(xCord, yCord, newX, newY, true));
+					availableMoves.add(new Move(xCord, yCord, newX, newY, false));
+				} else if (pieceAtDestination.getColor() != this.getColor()) {
+					availableMoves.add(new Move(xCord, yCord, newX, newY, true));
+				}
 			}
 		}
-	}
 		return availableMoves;
 	}
 
 	public int getValue() {
-	
+
 		return 9;
 	}
 }

@@ -16,9 +16,10 @@ public abstract class Piece implements Cloneable, Serializable {
 	protected Color color;
 
 	private List<Move> availableMoves;
-/**
- *    Restituisce l'elenco di mosse disponibili per il pezzo selezionato
- */
+
+	/**
+	 * Restituisce l'elenco di mosse disponibili per il pezzo selezionato
+	 */
 	public abstract List<Move> getAvailableMoves(Board board, int xCord, int yCord);
 
 	@Override
@@ -38,20 +39,20 @@ public abstract class Piece implements Cloneable, Serializable {
 		this.yCord = yCord;
 		this.value = value;
 	}
-	
+
 	/**
 	 * restituisce il valore del pezzo in base alla classe a cui appartiene
+	 * 
 	 * @return valore del pezzo
 	 */
-	public int getValueFromInstanceOf()
-    {
-    	if(this instanceof Pawn)
-    		return 1;
-    	else if(this instanceof Rook)
-    		return 5;
-    	else if(this instanceof Knight || this instanceof Bishop)
-    		return 3;
-    	else
-    		return 9;
-    }
+	public int getValueFromInstanceOf() {
+		if (this instanceof Pawn)
+			return 1;
+		else if (this instanceof Rook)
+			return 5;
+		else if (this instanceof Knight || this instanceof Bishop)
+			return 3;
+		else
+			return 9;
+	}
 }

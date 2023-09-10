@@ -16,14 +16,14 @@ import lombok.Data;
 
 @Data
 public class Board implements Cloneable, Serializable {
-	
+
 	private static final long serialVersionUID = -5189619093542858077L;
 	private static final int columnsNumber = 8;
 	private static final int linesNumber = 8;
 
 	private Piece[][] board = new Piece[8][8];
 	private List<Move> getAvailableMovesByColor;
-	
+
 	public static int getLinesnumber() {
 		return linesNumber;
 	}
@@ -43,7 +43,8 @@ public class Board implements Cloneable, Serializable {
 	}
 
 	/**
-	 * richiede le coordinate, e restituisce il pezzo in quella posizione 
+	 * richiede le coordinate, e restituisce il pezzo in quella posizione
+	 * 
 	 * @return pezzo alla posizione selezionata
 	 * @throws IllegalArgumentException
 	 */
@@ -97,7 +98,7 @@ public class Board implements Cloneable, Serializable {
 	}
 
 	/** Stampa sulla console la scacchiera */
-	public void displayBoard() { 
+	public void displayBoard() {
 
 		System.out.println("    0    1   2    3    4    5    6    7");
 		System.out.println("  --------------------------------------  ");
@@ -128,8 +129,8 @@ public class Board implements Cloneable, Serializable {
 	}
 
 	/**
-	 restituisce l'elenco dei pezzi nella scacchiera di un dato colore
-	 */ 
+	 * restituisce l'elenco dei pezzi nella scacchiera di un dato colore
+	 */
 	public List<Piece> getPiecesByColor(Color playerColor) {
 		List<Piece> piecesByColor = new ArrayList<>();
 		for (int x = 0; x < Board.columnsNumber; x++) {
@@ -163,13 +164,14 @@ public class Board implements Cloneable, Serializable {
 		if (destinationPiece != null) {
 			destinationPiece.setXCord(-1); // Rimuovi il pezzo catturato dalla scacchiera impostando le coordinate a -1
 			destinationPiece.setYCord(-1);
-			destinationPiece.setValue(0); //Setta il valore del pezzo catturato a 0
+			destinationPiece.setValue(0); // Setta il valore del pezzo catturato a 0
 		}
 	}
 
-/**
- * Restituisce la lista di tutte le mosse disponibili di un giocatore di un determinato colore
- */
+	/**
+	 * Restituisce la lista di tutte le mosse disponibili di un giocatore di un
+	 * determinato colore
+	 */
 	public List<Move> getAvailableMovesByColor(Color color) {
 		List<Move> availableMoves = new ArrayList<>();
 
@@ -188,6 +190,7 @@ public class Board implements Cloneable, Serializable {
 
 	/**
 	 * resituisce true se il re è sotto scacco
+	 * 
 	 * @param color
 	 * @param board
 	 * @return true o false
@@ -224,7 +227,7 @@ public class Board implements Cloneable, Serializable {
 	}
 
 	/**
-	 * Controlla se c'è lo scacco matto	 
+	 * Controlla se c'è lo scacco matto
 	 */
 	public boolean isCheckMate(Color color, Board board) {
 		// se il re non è sotto scacco non può esserci scacco matto

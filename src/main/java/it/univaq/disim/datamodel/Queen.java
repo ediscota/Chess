@@ -12,7 +12,7 @@ public class Queen extends Piece implements Serializable {
 	}
 
 	private static final long serialVersionUID = 574327588593668986L;
-	
+
 	@Override
 	public String toString() {
 		if (this.getColor() == Color.BIANCO) {
@@ -46,8 +46,7 @@ public class Queen extends Piece implements Serializable {
 				if (destinationPiece == null) {
 
 					availableMoves.add(new Move(xCord, yCord, newX, newY, false));
-				}
-				else if(destinationPiece.getColor() != this.getColor()) {
+				} else if (destinationPiece.getColor() != this.getColor()) {
 					availableMoves.add(new Move(xCord, yCord, newX, newY, true));
 				}
 
@@ -63,10 +62,10 @@ public class Queen extends Piece implements Serializable {
 
 		return availableMoves;
 	}
-	
+
 	public int getValue() {
-		
-			return 9;
-		}
+
+		return 9;
+	}
 
 }
